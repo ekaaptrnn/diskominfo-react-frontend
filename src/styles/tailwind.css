@@ -1,37 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  /* Warna Dasar Branding (Bisa diupdate via API Laravel nanti) */
-  --color-primary: #0077b6;
-  --color-accent: #00b4d8;
-  --color-bg-light: #f8fafc;
+  /* Mengunci font tunggal: Plus Jakarta Sans */
+  --font-sans: "Plus Jakarta Sans", sans-serif;
 
-  /* Fluid Typography */
-  --font-size-hero: clamp(2.5rem, 1.5rem + 5vw, 5rem);
-  --font-size-section: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-}
-
-@utility glass-nav {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
-}
-
-@utility bento-card {
-  background: white;
-  border-radius: 2rem;
-  padding: 1.5rem;
-  border: 1px solid #f1f5f9;
-  transition: all 0.3s ease;
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
-  }
+  --color-primary: #1e4b8f; /* Biru Profesional */
+  --color-accent: #0ea5e9;  /* Sky Blue Fresh */
+  
+  --font-size-hero: clamp(2rem, 1rem + 5vw, 4.5rem);
 }
 
 @layer base {
   body {
-    @apply bg-[var(--color-bg-light)] text-slate-900 font-['Inter',_sans-serif] m-0;
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em; /* Meningkatkan kemewahan visual */
+    @apply antialiased bg-slate-50 text-slate-900;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.025em; /* Lebih rapat untuk heading agar tegas */
+    @apply font-extrabold;
   }
 }

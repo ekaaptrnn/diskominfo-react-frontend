@@ -1,40 +1,48 @@
-// src/components/sections/LayananCepat.jsx
+import React from 'react';
 
-const quickLinks = [
-  { name: "LAPOR SP4N", icon: "bi-megaphone", color: "bg-rose-500" },
-  { name: "Lapor Gub", icon: "bi-bank", color: "bg-orange-500" },
-  { name: "ULAS", icon: "bi-chat-dots", color: "bg-emerald-500" },
-  { name: "Lapor Mas Wali", icon: "bi-person-badge", color: "bg-blue-500" },
-  { name: "KONATA", icon: "bi-headset", color: "bg-purple-500" },
-  { name: "Solo Data", icon: "bi-bar-chart-line", color: "bg-sky-500" },
-  { name: "PPID Pelaksana", icon: "bi-file-earmark-lock", color: "bg-pink-500" },
-  { name: "Fasilitas Publik", icon: "bi-building", color: "bg-indigo-500" },
+// 1. Data Layanan Spesifik Diskominfo (8 Item)
+const services = [
+  { name: "LAPOR SP4N", sub: "Aduan Nasional", icon: "bi-megaphone-fill", color: "bg-rose-500" },
+  { name: "Lapor Gub", sub: "Aduan Provinsi", icon: "bi-bank2", color: "bg-orange-500" },
+  { name: "ULAS", sub: "Aduan Kota Solo", icon: "bi-chat-left-text-fill", color: "bg-emerald-500" },
+  { name: "Lapor Mas Wali", sub: "Aduan Langsung", icon: "bi-person-badge-fill", color: "bg-blue-600" },
+  { name: "KONATA", icon: "bi-headset", sub: "Layanan Disabilitas", color: "bg-purple-600" },
+  { name: "Solo Data", sub: "Portal Data Terbuka", icon: "bi-bar-chart-line-fill", color: "bg-sky-500" },
+  { name: "PPID Pelaksana", sub: "Informasi Publik", icon: "bi-file-earmark-lock-fill", color: "bg-pink-600" },
+  { name: "Fasilitas Publik", sub: "Akses Sarpras", icon: "bi-building-fill-check", color: "bg-indigo-600" },
 ];
 
 export default function LayananCepat() {
   return (
-    <section className="py-10 text-center bg-white">
+    <section className="py-20 bg-white font-sans">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Label Kecil sesuai Blueprint */}
-        <div className="inline-flex items-center gap-2 bg-sky-50 text-sky-600 px-4 py-1.5 rounded-full mb-4 font-bold text-[10px] uppercase border border-sky-100">
-          <span className="w-1.5 h-1.5 bg-sky-600 rounded-full animate-pulse"></span> Layanan Digital
+        <div className="text-center mb-12">
+          {/* Label Kecil Profesional */}
+          <div className="inline-flex items-center gap-2 bg-slate-50 text-primary px-4 py-1.5 rounded-full mb-4 font-bold text-[10px] uppercase border border-slate-100 shadow-sm">
+            <span className="w-1.5 h-1.5 bg-primary rounded-full"></span> Layanan Digital Terintegrasi
+          </div>
+          <h2 className="text-3xl font-extrabold text-slate-800 tracking-tighter">Layanan Cepat</h2>
+          <p className="text-slate-400 font-medium text-sm mt-2">Akses cepat layanan Pemerintah Kota Surakarta dalam satu genggaman</p>
         </div>
 
-        <h2 className="text-3xl font-black text-slate-800 mb-2 tracking-tighter">Layanan Cepat</h2>
-        <p className="text-slate-400 text-sm mb-12">Akses layanan publik Kota Surakarta dalam satu klik</p>
-
-        {/* Grid Ikon 8 Layanan */}
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-4 md:gap-6">
-          {quickLinks.map((item, i) => (
-            <div key={i} className="group cursor-pointer flex flex-col items-center">
-              {/* Box Ikon - Sesuai Point #2: Icon class ini nantinya di-load dari DB */}
-              <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-white text-xl md:text-2xl shadow-lg transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl ${item.color}`}>
+        {/* 8 Grid: 4 di baris atas, 4 di baris bawah (pada layar desktop) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          {services.map((item, i) => (
+            <div 
+              key={i} 
+              className="group p-8 rounded-[2.5rem] border border-slate-100 bg-slate-50/50 hover:bg-white hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center cursor-pointer"
+            >
+              {/* Box Ikon - Bulat melingkar sesuai permintaan desain Fresh */}
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white text-3xl mb-6 shadow-lg group-hover:rotate-6 transition duration-300 ${item.color}`}>
                 <i className={`bi ${item.icon}`}></i>
               </div>
               
-              {/* Nama Layanan */}
-              <p className="mt-4 text-[9px] md:text-[10px] font-black text-slate-600 uppercase tracking-tighter leading-tight text-center group-hover:text-primary transition-colors">
+              {/* Text Content - Jakarta Sans */}
+              <h4 className="font-extrabold text-slate-800 text-xs md:text-sm uppercase tracking-tight leading-tight">
                 {item.name}
+              </h4>
+              <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest opacity-80">
+                {item.sub}
               </p>
             </div>
           ))}

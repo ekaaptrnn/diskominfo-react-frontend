@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useDateTime = () => {
+export const useDateTime = () => { // pastikan nama export-nya useDateTime (kecil)
   const [dateTime, setDateTime] = useState(new Date());
 
   useEffect(() => {

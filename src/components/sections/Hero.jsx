@@ -1,23 +1,79 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const banners = [
+  {
+    id: 1,
+    title: "DISKOMINFO SP KOTA SURAKARTA",
+    address: "Gedung Bale Upakari Lantai 3, Jl. Jenderal Sudirman No.2 Kampung Baru, Kec. Pasar Kliwon, Kota Surakarta, Jawa Tengah 57133",
+    bg: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2000",
+  },
+  {
+    id: 2,
+    title: "TRANSFORMASI DIGITAL SOLO",
+    address: "Mewujudkan Solo Smart City yang inklusif dan transparan untuk seluruh warga.",
+    bg: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000",
+  }
+];
+
 export default function Hero() {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
+    }, 5000); // Geser tiap 5 detik
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="pt-32 pb-10 px-4 md:px-10">
-      <div className="relative h-[450px] md:h-[550px] w-full rounded-[3rem] overflow-hidden group shadow-2xl">
-        <img 
-          src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070" 
-          className="absolute inset-0 w-full h-full object-cover" 
-          alt="Hero" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent flex items-center px-10 md:px-20">
-          <div className="max-w-xl text-white">
-            <span className="bg-primary px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 inline-block">Informasi Terkini</span>
-            <h1 className="text-hero font-black leading-[1.1] mb-6 tracking-tighter">BYTESFEST 2026</h1>
-            <p className="text-lg opacity-80 mb-8 font-medium">Festival Teknologi & Inovasi Digital Kota Surakarta.</p>
-            <button className="bg-white text-primary px-8 py-4 rounded-2xl font-bold flex items-center gap-3 hover:bg-primary hover:text-white transition-all shadow-xl">
-              Daftar Sekarang <i className="bi bi-arrow-right"></i>
-            </button>
+    <section className="relative h-[500px] md:h-[600px] w-full overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8 }}
+          className="absolute inset-0"
+        >
+          <img src={banners[current].bg} className="w-full h-full object-cover" alt="Banner" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/40 to-transparent flex items-center px-6 md:px-20">
+            <div className="max-w-3xl text-white">
+              <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-none">
+                {banners[current].title}
+              </h1>
+              <p className="text-sm md:text-lg font-bold opacity-80 max-w-xl leading-relaxed">
+                {banners[current].address}
+              </p>
+            </div>
           </div>
-        </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Social Media Sidebar (Left) */}
+      <div className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-20">
+        {['instagram', 'facebook', 'youtube'].map((icon) => (
+          <button key={icon} className="w-10 h-10 rounded-full border border-white/30 bg-white/10 backdrop-blur-md flex items-center justify-center hover:bg-white hover:text-primary transition">
+            <i className={`bi bi-${icon}`}></i>
+          </button>
+        ))}
+      </div>
+
+      {/* Navigation Arrows */}
+      <button onClick={() => setCurrent(current === 0 ? banners.length-1 : current-1)} className="absolute left-20 top-1/2 w-12 h-12 rounded-full bg-black/20 text-white flex items-center justify-center hover:bg-black/40 z-20">
+        <i className="bi bi-chevron-left"></i>
+      </button>
+      <button onClick={() => setCurrent(current === banners.length-1 ? 0 : current+1)} className="absolute right-10 top-1/2 w-12 h-12 rounded-full bg-black/20 text-white flex items-center justify-center hover:bg-black/40 z-20">
+        <i className="bi bi-chevron-right"></i>
+      </button>
+
+      {/* Indicators */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+        {banners.map((_, i) => (
+          <div key={i} className={`h-1.5 rounded-full transition-all ${i === current ? 'w-10 bg-white' : 'w-3 bg-white/30'}`} />
+        ))}
       </div>
     </section>
-  )
+  );
 }

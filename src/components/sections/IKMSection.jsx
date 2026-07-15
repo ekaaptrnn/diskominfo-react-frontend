@@ -1,49 +1,75 @@
-import { BarChart, Bar, XAxis, ResponsiveContainer, Cell, Tooltip } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
 
-const data = [
-  { name: 'S1 24', score: 82 },
-  { name: 'S2 24', score: 85 },
-  { name: 'S1 25', score: 87 },
-  { name: 'S2 25', score: 88 },
-  { name: 'S1 26', score: 88.4 },
+const dataPie = [
+  { name: 'S2', value: 17.1, color: '#7c3aed' },
+  { name: 'S1', value: 54.1, color: '#6366f1' },
+  { name: 'D3', value: 16.2, color: '#60a5fa' },
+  { name: 'SMA', value: 12.6, color: '#38bdf8' },
 ];
 
 export default function IKMSection() {
   return (
     <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="bg-primary rounded-[2.5rem] p-10 text-white flex flex-col justify-between shadow-xl shadow-primary/20">
-            <div>
-              <p className="text-[10px] font-black uppercase opacity-60">Indeks Kepuasan Masyarakat</p>
-              <h2 className="text-7xl font-black mt-4 tracking-tighter">88.4</h2>
-              <p className="text-emerald-400 font-bold mt-2 flex items-center gap-2">
-                <i className="bi bi-patch-check-fill"></i> Sangat Baik
-              </p>
+      <div className="max-w-7xl mx-auto px-6 border-2 border-slate-100 rounded-[2rem] p-8 md:p-12 shadow-sm relative">
+        <div className="flex justify-between items-start mb-12">
+          <div className="flex items-center gap-4">
+             <h2 className="text-2xl font-black text-primary uppercase tracking-tighter">Indeks Kepuasan Masyarakat</h2>
+             <div className="flex gap-2 text-primary">
+                <i className="bi bi-pencil-square"></i>
+                <i className="bi bi-people-fill"></i>
+             </div>
+          </div>
+          <button className="bg-primary text-white px-8 py-3 rounded-lg font-bold text-sm">Form Kepuasan Masyarakat</button>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+          {/* Skor Section */}
+          <div className="text-center lg:border-r border-slate-200 lg:pr-12">
+            <img src="/logo-solo-colored.png" className="w-16 mx-auto mb-6" alt="Solo" />
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">IKM</p>
+            <h3 className="text-7xl font-black text-slate-800 tracking-tighter">92.12</h3>
+            <p className="font-bold text-slate-600 mt-2">Mutu Pelayanan</p>
+            <p className="text-primary font-black uppercase tracking-widest mt-1">Sangat Baik</p>
+            
+            <div className="mt-8 text-left space-y-2 text-xs font-bold text-slate-500">
+               <p>Responden : 111 Orang</p>
+               <p>Laki-laki : 62 Orang</p>
+               <p>Perempuan : 49 Orang</p>
             </div>
-            <p className="text-xs opacity-70 leading-relaxed mt-10">Berdasarkan 847 responden periode Januari - Juni 2026.</p>
           </div>
 
-          <div className="lg:col-span-2 bento-card border-none bg-slate-50">
-            <h3 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
-              <i className="bi bi-graph-up-arrow text-primary"></i> Tren Kepuasan (2024-2026)
-            </h3>
-            <div className="h-[250px] w-full">
+          {/* Chart & Filter */}
+          <div className="lg:col-span-2">
+            <div className="flex gap-4 mb-8">
+               <select className="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm font-bold">
+                  <option>Triwulan III</option>
+               </select>
+               <select className="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm font-bold">
+                  <option>2025</option>
+               </select>
+            </div>
+
+            <div className="h-[300px] w-full flex items-center">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={data}>
-                  <XAxis dataKey="name" fontSize={10} axisLine={false} tickLine={false} />
-                  <Tooltip cursor={{fill: 'transparent'}} contentStyle={{borderRadius: '15px', border:'none', boxShadow:'0 10px 15px rgba(0,0,0,0.1)'}} />
-                  <Bar dataKey="score" radius={[10, 10, 10, 10]} barSize={40}>
-                    {data.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={index === 4 ? 'var(--color-primary)' : '#cbd5e1'} />
+                <PieChart>
+                  <Pie data={dataPie} innerRadius={60} outerRadius={100} paddingAngle={5} dataKey="value">
+                    {dataPie.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
-                  </Bar>
-                </BarChart>
+                  </Pie>
+                  <Legend verticalAlign="middle" align="right" layout="vertical" />
+                </PieChart>
               </ResponsiveContainer>
+            </div>
+            
+            <div className="mt-6 flex justify-center">
+               <button className="bg-emerald-500 text-white px-6 py-2 rounded font-bold text-xs uppercase flex items-center gap-2 tracking-widest">
+                  Download as Image
+               </button>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

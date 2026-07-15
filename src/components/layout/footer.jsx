@@ -1,114 +1,168 @@
+import React, { useState, useEffect } from "react";
+import { MapPin, Info, ExternalLink, Users, ChevronRight } from "lucide-react";
+import { visitorStats } from '../../data';
+import axios from "axios";
+
 export default function Footer() {
+  // State untuk menampung data statistik dari Backend
+  const [visitorStats, setVisitorStats] = useState([
+    { label: "Hari Ini", value: "..." },
+    { label: "Kemarin", value: "..." },
+    { label: "Bulan Ini", value: "..." },
+    { label: "Total", value: "..." },
+  ]);
+
+  // Logic Fetching dari Backend Laravel
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        // Sesuaikan endpoint ini dengan API Laravel Anda nanti (Blueprint Bab IV)
+        const response = await axios.get("/api/visitor-stats");
+        if (response.data) {
+          setVisitorStats([
+            { label: "Hari Ini", value: response.data.today },
+            { label: "Kemarin", value: response.data.yesterday },
+            { label: "Bulan Ini", value: response.data.month },
+            { label: "Total", value: response.data.total },
+          ]);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data statistik:", error);
+        // Tetap biarkan "..." jika gagal agar tidak merusak UI
+      }
+    };
+
+    fetchStats();
+  }, []);
+
   return (
-    <footer className="bg-[#0f172a] text-white pt-20">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Top Service Hub */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          <button className="bg-white/5 border border-white/10 p-6 rounded-[2rem] flex items-center gap-6 hover:bg-primary transition group">
-            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-2xl font-black group-hover:bg-white group-hover:text-primary">P</div>
-            <div className="text-left">
-              <h4 className="font-black text-sm uppercase tracking-tighter leading-none">PPID Kota Surakarta</h4>
-              <p className="text-[9px] opacity-60 mt-2">Pejabat Pengelola Informasi & Dokumentasi</p>
-            </div>
-          </button>
-          <button className="bg-white/5 border border-white/10 p-6 rounded-[2rem] flex items-center gap-6 hover:bg-sky-500 transition group">
-            <div className="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center text-2xl font-black group-hover:bg-white group-hover:text-sky-500">S</div>
-            <div className="text-left">
-              <h4 className="font-black text-sm uppercase tracking-tighter leading-none">SoloData</h4>
-              <p className="text-[9px] opacity-60 mt-2">Portal Data Terbuka Kota Surakarta</p>
-            </div>
-          </button>
-          <button className="bg-white/5 border border-white/10 p-6 rounded-[2rem] flex items-center gap-6 hover:bg-emerald-500 transition group">
-            <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-2xl font-black group-hover:bg-white group-hover:text-emerald-500">P</div>
-            <div className="text-left">
-              <h4 className="font-black text-sm uppercase tracking-tighter leading-none">Pemerintah Kota Surakarta</h4>
-              <p className="text-[9px] opacity-60 mt-2">Portal Resmi Kota Bengawan</p>
-            </div>
-          </button>
-        </div>
-
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 pb-20">
-          {/* Kolom 1: Alamat & Map */}
-          <div>
-            <h5 className="font-black text-xs uppercase tracking-widest mb-8 flex items-center gap-2">
-              <i className="bi bi-geo-alt text-sky-400"></i> Lokasi
-            </h5>
-            <div className="rounded-3xl overflow-hidden grayscale hover:grayscale-0 transition duration-700 h-40 bg-white/10 mb-6">
-               <img src="/map-placeholder.png" className="w-full h-full object-cover" alt="Map" />
-            </div>
-            <p className="text-[11px] leading-relaxed opacity-60">
-              Gedung Bale Upakari Lantai 3, Jl. Jenderal Sudirman No. 2, Kompleks Balaikota Surakarta 57133
-            </p>
-          </div>
-
-          {/* Kolom 2: Info Publik */}
-          <div>
-            <h5 className="font-black text-xs uppercase tracking-widest mb-8 flex items-center gap-2">
-              <i className="bi bi-info-circle text-sky-400"></i> Informasi Publik
-            </h5>
-            <ul className="text-[11px] space-y-4 font-bold opacity-60 uppercase tracking-tighter">
-              <li className="hover:text-sky-400 cursor-pointer transition flex items-center gap-3">
-                <i className="bi bi-chevron-right text-[8px]"></i> Informasi Berkala
-              </li>
-              <li className="hover:text-sky-400 cursor-pointer transition flex items-center gap-3">
-                <i className="bi bi-chevron-right text-[8px]"></i> Informasi Setiap Saat
-              </li>
-              <li className="hover:text-sky-400 cursor-pointer transition flex items-center gap-3">
-                <i className="bi bi-chevron-right text-[8px]"></i> Informasi Serta Merta
-              </li>
-              <li className="hover:text-sky-400 cursor-pointer transition flex items-center gap-3">
-                <i className="bi bi-chevron-right text-[8px]"></i> Informasi Dikecualikan
-              </li>
-            </ul>
-          </div>
-
-          {/* Kolom 3: Link Terkait */}
-          <div>
-            <h5 className="font-black text-xs uppercase tracking-widest mb-8 flex items-center gap-2">
-              <i className="bi bi-link-45deg text-sky-400"></i> Link Terkait
-            </h5>
-            <ul className="text-[11px] space-y-4 font-bold opacity-60 uppercase tracking-tighter">
-              <li className="hover:text-sky-400 cursor-pointer transition flex items-center gap-3">
-                <i className="bi bi-chevron-right text-[8px]"></i> Pemerintah Kota Surakarta
-              </li>
-              <li className="hover:text-sky-400 cursor-pointer transition flex items-center gap-3">
-                <i className="bi bi-chevron-right text-[8px]"></i> PPID Kota Surakarta
-              </li>
-              <li className="hover:text-sky-400 cursor-pointer transition flex items-center gap-3">
-                <i className="bi bi-chevron-right text-[8px]"></i> Solo Data
-              </li>
-              <li className="hover:text-sky-400 cursor-pointer transition flex items-center gap-3">
-                <i className="bi bi-chevron-right text-[8px]"></i> Kominfo RI
-              </li>
-            </ul>
-          </div>
-
-          {/* Kolom 4: Statistik Pengunjung - Sesuai Gambar V23 */}
-          <div className="bg-white/5 p-8 rounded-[2rem] border border-white/10">
-  <h5 className="font-bold text-[10px] uppercase tracking-widest text-sky-400 mb-6">Statistik Pengunjung</h5>
-  <div className="space-y-4">
-    <div className="flex justify-between items-center py-2 border-b border-white/5">
-      <span className="text-[11px] font-medium opacity-60">Hari Ini</span>
-      <span className="text-xl font-extrabold tracking-tighter text-white">243</span>
-    </div>
-    <div className="flex justify-between items-center py-2 border-b border-white/5">
-      <span className="text-[11px] font-medium opacity-60">Bulan Ini</span>
-      <span className="text-xl font-extrabold tracking-tighter text-white">19,083</span>
-    </div>
-    <div className="flex justify-between items-center py-2">
-      <span className="text-[11px] font-extrabold text-sky-400">TOTAL</span>
-      <span className="text-xl font-extrabold tracking-tighter text-sky-400">28,040</span>
+    <footer
+      className="border-t border-white/[0.1] mt-10 font-sans"
+      style={{ background: "#0d1a36" }}
+    >
+      {/* 1. TOP BAR: Banner Organisasi Terkait (Statis sesuai Branding) */}
+      <div className="border-b border-white/[0.08] px-4 py-6">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-8 md:gap-12">
+          {[
+            {
+              name: "PPID Kota Surakarta",
+              sub: "Pejabat Pengelola Informasi & Dokumentasi",
+              g: "from-[#29A8E0] to-[#1e4f92]",
+              initial: "P",
+            },
+            {
+              name: "SoloData",
+              sub: "Portal Data Terbuka",
+              g: "from-cyan-500 to-sky-600",
+              initial: "S",
+            },
+            {
+              name: "Pemerintah Kota Surakarta",
+              sub: "Kota Bengawan",
+              g: "from-emerald-500 to-teal-600",
+              initial: "P",
+            },
+          ].map((org) => (
+            <div key={org.name} className="flex items-center gap-3 group cursor-pointer">
+              <div
+                className={`w-11 h-11 rounded-xl bg-gradient-to-br flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300 ${org.g}`}
+              >
+                <span className="text-white font-black text-sm">
+                  {org.initial}
+                </span>
+              </div>
+              <div>
+                <p className="text-white font-extrabold text-sm leading-tight group-hover:text-sky-400 transition-colors">
+                  {org.name}
+                </p>
+                <p className="text-blue-300/60 text-[10px] font-medium uppercase tracking-tighter mt-0.5">{org.sub}</p>
               </div>
             </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 2. MAIN FOOTER CONTENT */}
+      <div className="px-6 py-12 max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        
+        {/* Kolom 1: Lokasi */}
+        <div>
+          <h4 className="text-[#29A8E0] font-black text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
+            <MapPin size={14} strokeWidth={3} /> Lokasi
+          </h4>
+          <div className="rounded-2xl overflow-hidden border border-white/[0.12] mb-4 shadow-2xl aspect-video relative group">
+            <iframe
+              title="Lokasi Diskominfo SP"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.123!2d110.8265!3d-7.5558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a168636a0d0d1%3A0x6b1f2382e2136e05!2sBalaikota%20Surakarta!5e0!3m2!1sen!2sid!4v1700000000000"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              className="grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+            />
+          </div>
+          <p className="text-blue-300/65 text-[11px] leading-relaxed font-medium">
+            Gedung Bale Upakari Lantai 3, Jl. Jenderal Sudirman No. 2,
+            Kompleks Balaikota Surakarta 57133
+          </p>
+        </div>
+
+        {/* Kolom 2: Informasi Publik */}
+        <div>
+          <h4 className="text-[#29A8E0] font-black text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
+            <Info size={14} strokeWidth={3} /> Informasi Publik
+          </h4>
+          <div className="flex flex-col gap-1">
+            {["Informasi Berkala", "Informasi Setiap Saat", "Informasi Serta Merta", "Informasi Dikecualikan"].map((item) => (
+              <a key={item} href="#" className="flex items-center gap-2 text-blue-300/65 text-xs py-2 hover:text-white transition-all group border-b border-white/5 last:border-0">
+                <ChevronRight size={10} className="text-[#29A8E0]/50 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                <span className="font-bold tracking-tight">{item}</span>
+              </a>
+            ))}
           </div>
         </div>
 
-        {/* Bottom Rights */}
-        <div className="py-8 border-t border-white/5 flex justify-between items-center text-[9px] font-bold opacity-40 uppercase tracking-widest">
-           <p>© 2026 — Pemerintah Kota Surakarta. Hak cipta dilindungi undang-undang.</p>
-           <p>Dinas Komunikasi Informatika dan Persandian Kota Surakarta</p>
+        {/* Kolom 3: Link Terkait */}
+        <div>
+          <h4 className="text-[#29A8E0] font-black text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
+            <ExternalLink size={14} strokeWidth={3} /> Link Terkait
+          </h4>
+          <div className="flex flex-col gap-1">
+            {["Pemerintah Kota Surakarta", "PPID Kota Surakarta", "Solo Data", "Kominfo RI"].map((item) => (
+              <a key={item} href="#" className="flex items-center gap-2 text-blue-300/65 text-xs py-2 hover:text-white transition-all group border-b border-white/5 last:border-0">
+                <ChevronRight size={10} className="text-[#29A8E0]/50 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                <span className="font-bold tracking-tight">{item}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Kolom 4: Pengunjung (DINAMIS DARI BACKEND) */}
+        <div>
+          <h4 className="text-[#29A8E0] font-black text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
+            <Users size={14} strokeWidth={3} /> Pengunjung
+          </h4>
+          <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
+            {visitorStats.map((stat) => (
+              <div
+                key={stat.label}
+                className="flex items-center justify-between py-2.5 border-b border-white/[0.07] last:border-0"
+              >
+                <span className="text-blue-300/65 text-[11px] font-bold uppercase tracking-tight">{stat.label}</span>
+                <span className="text-white font-black text-sm tabular-nums tracking-tighter">
+                  {stat.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* 3. BOTTOM BAR */}
+      <div className="border-t border-white/[0.07] px-6 py-6 text-center sm:text-left">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-blue-300/40 text-[10px] font-bold uppercase tracking-[0.15em]">
+          <p>© 2026 — Pemerintah Kota Surakarta. Hak cipta dilindungi undang-undang.</p>
+          <p className="text-[#29A8E0]/60 uppercase">Dinas Komunikasi Informatika dan Persandian Kota Surakarta</p>
         </div>
       </div>
     </footer>

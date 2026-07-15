@@ -1,0 +1,23 @@
+export const navMenus = [
+  { label: "Home", href: "/", icon: "Home" },
+  { 
+    label: "PPID", 
+    href: "#ppid", 
+    icon: "FileText",
+    sub: ["Daftar Informasi Publik", "Informasi Berkala", "Informasi Setiap Saat", "Informasi Serta Merta"]
+  },
+  { 
+    label: "Profil", 
+    href: "#profil", 
+    icon: "Info",
+    sub: ["Visi & Misi", "Struktur Organisasi", "Tupoksi"]
+  },
+  { label: "SKM", href: "/skm", icon: "Star" },
+  { label: "Informasi", href: "/artikel", icon: "Newspaper" },
+  { 
+    label: "Layanan", 
+    href: "#layanan", 
+    icon: "ClipboardList",
+    sub: ["Maklumat Layanan", "Standar Layanan"]
+  },
+];

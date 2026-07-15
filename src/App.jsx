@@ -9,6 +9,8 @@ import Tupoksi from "./pages/Tupoksi";
 import ArtikelList from "./pages/ArtikelList";
 import SKMForm from "./pages/SKMForm";
 import MaklumatPelayanan from "./pages/MaklumatPelayanan";
+import PPIDPage from "./pages/PPIDPage";
+
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
             <Route path="/artikel" element={<ArtikelList />} />
             <Route path="/skm" element={<SKMForm />} />
             <Route path="/maklumat" element={<MaklumatPelayanan />} />
+            <Route path="/ppid" element={<PPIDPage />} />
           </Routes>
         </main>
         <Footer />

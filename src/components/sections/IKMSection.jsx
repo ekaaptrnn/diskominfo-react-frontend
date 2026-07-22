@@ -1,13 +1,30 @@
+import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
+import { api } from '../../services/api'; // Sesuaikan path api kamu jika berbeda
 
-const dataPie = [
-  { name: 'S2', value: 17.1, color: '#7c3aed' },
-  { name: 'S1', value: 54.1, color: '#6366f1' },
-  { name: 'D3', value: 16.2, color: '#60a5fa' },
-  { name: 'SMA', value: 12.6, color: '#38bdf8' },
-];
+// Warna bawaan untuk chart pendidikan
+const COLORS = ['#7c3aed', '#6366f1', '#60a5fa', '#38bdf8', '#a855f7', '#ec4899'];
 
 export default function IKMSection() {
+  const [stats, setStats] = useState(null);
+
+  // Ambil data statistik IKM dari Backend Laravel
+  useEffect(() => {
+    api.get('/skm/stats')
+      .then((res) => setStats(res.data))
+      .catch((err) => console.error("Gagal memuat statistik IKM:", err));
+  }, []);
+
+  // Olah data pendidikan dari backend menjadi format Recharts
+  const dataPie = stats?.pendidikan && Object.keys(stats.pendidikan).length > 0
+    ? Object.entries(stats.pendidikan).map(([key, value], index) => ({
+        name: key,
+        value: Number(value),
+        color: COLORS[index % COLORS.length]
+      }))
+    : [{ name: 'Belum Ada Data', value: 1, color: '#cbd5e1' }];
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6 border-2 border-slate-100 rounded-[2rem] p-8 md:p-12 shadow-sm relative">
@@ -19,7 +36,14 @@ export default function IKMSection() {
                 <i className="bi bi-people-fill"></i>
              </div>
           </div>
-          <button className="bg-primary text-white px-8 py-3 rounded-lg font-bold text-sm">Form Kepuasan Masyarakat</button>
+          
+          {/* TOMBOL YANG SUDAH BISA DI-KLIK */}
+          <Link 
+            to="/skm" 
+            className="bg-primary text-white px-8 py-3 rounded-lg font-bold text-sm hover:bg-opacity-90 transition-all inline-block"
+          >
+            Form Kepuasan Masyarakat
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
@@ -27,14 +51,24 @@ export default function IKMSection() {
           <div className="text-center lg:border-r border-slate-200 lg:pr-12">
             <img src="/logo-solo-colored.png" className="w-16 mx-auto mb-6" alt="Solo" />
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">IKM</p>
-            <h3 className="text-7xl font-black text-slate-800 tracking-tighter">92.12</h3>
-            <p className="font-bold text-slate-600 mt-2">Mutu Pelayanan</p>
-            <p className="text-primary font-black uppercase tracking-widest mt-1">Sangat Baik</p>
             
+            {/* Skor IKM Dinamis */}
+            <h3 className="text-7xl font-black text-slate-800 tracking-tighter">
+              {stats ? stats.ikm : '...'}
+            </h3>
+            
+            <p className="font-bold text-slate-600 mt-2">Mutu Pelayanan</p>
+            
+            {/* Mutu Dinamis */}
+            <p className="text-primary font-black uppercase tracking-widest mt-1">
+              {stats ? stats.mutu : 'MEMUAT...'}
+            </p>
+            
+            {/* Jumlah Responden Dinamis */}
             <div className="mt-8 text-left space-y-2 text-xs font-bold text-slate-500">
-               <p>Responden : 111 Orang</p>
-               <p>Laki-laki : 62 Orang</p>
-               <p>Perempuan : 49 Orang</p>
+               <p>Responden : {stats ? stats.total_responden : 0} Orang</p>
+               <p>Laki-laki : {stats ? stats.laki_laki : 0} Orang</p>
+               <p>Perempuan : {stats ? stats.perempuan : 0} Orang</p>
             </div>
           </div>
 
@@ -45,10 +79,11 @@ export default function IKMSection() {
                   <option>Triwulan III</option>
                </select>
                <select className="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm font-bold">
-                  <option>2025</option>
+                  <option>2026</option>
                </select>
             </div>
 
+            {/* Donut Chart Recharts */}
             <div className="h-[300px] w-full flex items-center">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>

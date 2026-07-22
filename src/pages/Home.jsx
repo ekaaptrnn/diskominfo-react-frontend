@@ -7,6 +7,7 @@ import IKMSection from '../components/sections/IKMSection';
 import PrestasiSection from '../components/sections/PrestasiSection';
 import StructureSection from '../components/sections/StructureSection';
 import HelpSection from '../components/sections/HelpSection';
+import InfografisSection from '../components/sections/InfografisSection';
 
 export default function Home() {
   return (

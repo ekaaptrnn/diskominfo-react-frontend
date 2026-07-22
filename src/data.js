@@ -37,3 +37,16 @@ export const ppidDocuments = [
   { id: 3, judul: "Daftar Aset Teknologi Informasi", kategori: "Informasi Setiap Saat", format: "XLSX", ukuran: "1.2 MB" },
   { id: 4, judul: "Prosedur Penanganan Siber", kategori: "Informasi Serta Merta", format: "PDF", ukuran: "850 KB" },
 ];
+
+export const infografisMedia = [
+  { id: 1, judul: "Podcast Ep. 25 — Masa Depan AI di Pemerintahan Solo", tipe: "Podcast", durasi: "24:10", icon: "Mic", color: "bg-purple-100 text-purple-600" },
+  { id: 2, judul: "Infografis: Alur Permohonan Informasi PPID", tipe: "Infografis", durasi: "1 halaman", icon: "BarChart3", color: "bg-sky-100 text-sky-600" },
+  { id: 3, judul: "Video: Tur Virtual Command Center Diskominfo", tipe: "Video", durasi: "05:42", icon: "Video", color: "bg-rose-100 text-rose-600" },
+  { id: 4, judul: "Infografis: Statistik Layanan Publik Triwulan III", tipe: "Infografis", durasi: "1 halaman", icon: "PieChart", color: "bg-emerald-100 text-emerald-600" },
+];
+
+export const galeriFoto = [
+  { id: 1, judul: "Konferensi Pers Peluncuran Aplikasi Solo Smart City", tanggal: "15 Juli 2026", image: "https://images.unsplash.com/photo-1540575861501-7ad05823c95b?q=80&w=400" },
+  { id: 2, judul: "Rapat Koordinasi Internal Bidang Statistik Sektoral", tanggal: "10 Juli 2026", image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=400" },
+  { id: 3, judul: "Kunjungan Kerja Wali Kota ke Command Center", tanggal: "02 Juli 2026", image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=400" },
+];

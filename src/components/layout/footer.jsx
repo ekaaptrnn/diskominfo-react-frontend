@@ -41,8 +41,8 @@ export default function Footer() {
       style={{ background: "#0d1a36" }}
     >
       {/* 1. TOP BAR: Banner Organisasi Terkait (Statis sesuai Branding) */}
-      <div className="border-b border-white/[0.08] px-4 py-6">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-8 md:gap-12">
+      <div className="border-b border-white/[0.08] px-6 py-6">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center sm:justify-between gap-8 md:gap-12">
           {[
             {
               name: "PPID Kota Surakarta",

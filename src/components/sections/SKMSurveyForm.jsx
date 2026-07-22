@@ -17,8 +17,10 @@ const SKMSurveyForm = () => {
   });
 
   useEffect(() => {
-    api.get('/layanans').then(res => setServices(res.data.data));
-  }, []);
+  api.get('/layanan')
+    .then(res => setServices(res.data))
+    .catch(err => console.error('Gagal memuat daftar layanan:', err));
+}, []);
 
   const handleServiceChange = (e) => {
     const id = e.target.value;

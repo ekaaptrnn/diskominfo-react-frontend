@@ -45,12 +45,10 @@ export default function ArtikelList() {
   // 4. Logika Pencarian & Filter (useMemo)
   const filteredArticles = useMemo(() => {
     return articles.filter(article => {
-      // Menyesuaikan penamaan field dari DB Laravel (judul, category/kategori)
+      // Menyesuaikan penamaan field dari DB Laravel (judul)
       const title = article.judul || article.title || '';
-      const categoryName = article.kategori?.nama || article.kategori || '';
-      
-      const matchesSearch = title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                            categoryName.toLowerCase().includes(searchTerm.toLowerCase());
+
+      const matchesSearch = title.toLowerCase().includes(searchTerm.toLowerCase());
       
       // Ambil tahun dari created_at atau tanggal
       const rawDate = article.created_at || article.tanggal || '';
@@ -102,7 +100,7 @@ export default function ArtikelList() {
           <Search size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
           <input 
             type="text" 
-            placeholder="Cari judul atau kategori..." 
+            placeholder="Cari judul berita..." 
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none"
@@ -156,9 +154,6 @@ export default function ArtikelList() {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                     alt={art.judul || art.title} 
                   />
-                  <div className="absolute top-4 left-4 bg-blue-600 text-white text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
-                    {art.kategori?.nama || art.kategori || 'Umum'}
-                  </div>
                 </div>
 
                 {/* Content Info */}

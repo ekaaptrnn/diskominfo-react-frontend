@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import VisiMisi from "./pages/VisiMisi";
 import Tupoksi from "./pages/Tupoksi";
 import ArtikelList from "./pages/ArtikelList";
+import ArtikelDetail from "./pages/ArtikelDetail";
 import SKMForm from "./pages/SKMForm";
 import MaklumatPelayanan from "./pages/MaklumatPelayanan";
 import PPIDPage from "./pages/PPIDPage";
@@ -28,6 +29,7 @@ const AppContent = () => {
           <Route path="/visi-misi" element={<VisiMisi />} />
           <Route path="/tupoksi" element={<Tupoksi />} />
           <Route path="/artikel" element={<ArtikelList />} />
+          <Route path="/artikel/:id" element={<ArtikelDetail />} />
           <Route path="/skm" element={<SKMForm />} />
           <Route path="/maklumat" element={<MaklumatPelayanan />} />
           <Route path="/ppid" element={<PPIDPage />} />

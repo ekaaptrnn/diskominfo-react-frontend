@@ -40,7 +40,7 @@ export const ppidDocuments = [
 
 export const infografisMedia = [
   { id: 1, judul: "Podcast Ep. 25 — Masa Depan AI di Pemerintahan Solo", tipe: "Podcast", durasi: "24:10", icon: "Mic", color: "bg-purple-100 text-purple-600" },
-  { id: 2, judul: "Infografis: Alur Permohonan Informasi PPID", tipe: "Infografis", durasi: "1 halaman", icon: "BarChart3", color: "bg-sky-100 text-sky-600" },
+  { id: 2, judul: "Infografis: Alur Permohonan Informasi PPID", tipe: "Infografis", durasi: "1 halaman", icon: "BarChart3", color: "bg-accent-100 text-accent-700" },
   { id: 3, judul: "Video: Tur Virtual Command Center Diskominfo", tipe: "Video", durasi: "05:42", icon: "Video", color: "bg-rose-100 text-rose-600" },
   { id: 4, judul: "Infografis: Statistik Layanan Publik Triwulan III", tipe: "Infografis", durasi: "1 halaman", icon: "PieChart", color: "bg-emerald-100 text-emerald-600" },
 ];

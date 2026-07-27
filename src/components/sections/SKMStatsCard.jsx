@@ -23,7 +23,7 @@ const SKMStatsCard = ({ stats }) => {
               {stats.ikm ?? 0}
             </h1>
             <div className="mt-2">
-              <span className="inline-block bg-blue-50 text-blue-600 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+              <span className="inline-block bg-primary-50 text-primary-700 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
                 Mutu: {stats.mutu || 'BELUM ADA DATA'}
               </span>
             </div>
@@ -55,7 +55,7 @@ const SKMStatsCard = ({ stats }) => {
               Object.entries(stats.pendidikan).map(([key, val]) => (
                 <div key={key} className="flex justify-between items-center bg-white p-2.5 rounded-xl border border-slate-100 shadow-sm">
                   <span className="text-slate-600 font-semibold">{key}</span>
-                  <span className="font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-lg">
+                  <span className="font-bold text-primary-700 bg-primary-50 px-2.5 py-0.5 rounded-lg">
                     {val} Orang
                   </span>
                 </div>

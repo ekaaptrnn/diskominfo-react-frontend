@@ -22,7 +22,7 @@ export default function InfografisSection() {
               return (
                 <div
                   key={item.id}
-                  className="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-sky-50/50 transition-all cursor-pointer group"
+                  className="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-accent-50/50 transition-all cursor-pointer group"
                 >
                   <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${item.color}`}>
                     <Icon size={20} />

@@ -10,9 +10,38 @@
   /* Mengunci font tunggal: Plus Jakarta Sans */
   --font-sans: "Plus Jakarta Sans", sans-serif;
 
-  --color-primary: #1e4b8f; /* Biru Profesional */
-  --color-accent: #0ea5e9;  /* Sky Blue Fresh */
-  
+  /*
+    Warna di bawah ini nilai DEFAULT saja (dipakai sebelum data Theme Setting
+    dari backend selesai di-fetch, dan sebagai fallback kalau API gagal).
+    Setelah halaman dimuat, ThemeProvider (src/context/ThemeContext.jsx) akan
+    menimpa nilai --color-primary-* / --color-accent-* ini secara realtime
+    berdasarkan warna yang diatur admin di dashboard, lengkap dengan gradasi
+    terang-gelapnya supaya tidak terlihat kaku/flat di berbagai elemen UI.
+  */
+  --color-primary-50: #e5edfa;
+  --color-primary-100: #cadbf4;
+  --color-primary-200: #95b7e9;
+  --color-primary-300: #6092de;
+  --color-primary-400: #2967c4;
+  --color-primary-500: #1e4b8f;
+  --color-primary-600: #1b4481;
+  --color-primary-700: #183c73;
+  --color-primary-800: #153565;
+  --color-primary-900: #122e58;
+  --color-primary: #1e4b8f; /* alias, dipakai class seperti bg-primary/text-primary */
+
+  --color-accent-50: #e5f6fd;
+  --color-accent-100: #ceeefc;
+  --color-accent-200: #9fddf9;
+  --color-accent-300: #70cdf6;
+  --color-accent-400: #36b8f3;
+  --color-accent-500: #0ea5e9;
+  --color-accent-600: #0c92cf;
+  --color-accent-700: #0b80b4;
+  --color-accent-800: #096d9a;
+  --color-accent-900: #085b80;
+  --color-accent: #0ea5e9;
+
   --font-size-hero: clamp(2rem, 1rem + 5vw, 4.5rem);
 }
 

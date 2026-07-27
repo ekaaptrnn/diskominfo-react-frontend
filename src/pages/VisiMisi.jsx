@@ -31,7 +31,7 @@ export default function VisiMisi() {
       {/* CARD VISI — white card + icon badge, sesuai Figma (bukan banner biru) */}
       <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 md:p-12 mt-10">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-11 h-11 bg-sky-100 text-primary rounded-2xl flex items-center justify-center shrink-0">
+          <div className="w-11 h-11 bg-accent-100 text-primary-700 rounded-2xl flex items-center justify-center shrink-0">
             <Eye size={20} />
           </div>
           <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight">Pernyataan Visi</h3>

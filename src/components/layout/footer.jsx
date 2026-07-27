@@ -72,10 +72,10 @@ export default function Footer() {
                 </span>
               </div>
               <div>
-                <p className="text-white font-extrabold text-sm leading-tight group-hover:text-sky-400 transition-colors">
+                <p className="text-white font-extrabold text-sm leading-tight group-hover:text-accent-400 transition-colors">
                   {org.name}
                 </p>
-                <p className="text-blue-300/60 text-[10px] font-medium uppercase tracking-tighter mt-0.5">{org.sub}</p>
+                <p className="text-accent-300/60 text-[10px] font-medium uppercase tracking-tighter mt-0.5">{org.sub}</p>
               </div>
             </div>
           ))}
@@ -101,7 +101,7 @@ export default function Footer() {
               className="grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
             />
           </div>
-          <p className="text-blue-300/65 text-[11px] leading-relaxed font-medium">
+          <p className="text-accent-300/65 text-[11px] leading-relaxed font-medium">
             Gedung Bale Upakari Lantai 3, Jl. Jenderal Sudirman No. 2,
             Kompleks Balaikota Surakarta 57133
           </p>
@@ -114,7 +114,7 @@ export default function Footer() {
           </h4>
           <div className="flex flex-col gap-1">
             {["Informasi Berkala", "Informasi Setiap Saat", "Informasi Serta Merta", "Informasi Dikecualikan"].map((item) => (
-              <a key={item} href="#" className="flex items-center gap-2 text-blue-300/65 text-xs py-2 hover:text-white transition-all group border-b border-white/5 last:border-0">
+              <a key={item} href="#" className="flex items-center gap-2 text-accent-300/65 text-xs py-2 hover:text-white transition-all group border-b border-white/5 last:border-0">
                 <ChevronRight size={10} className="text-[#29A8E0]/50 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                 <span className="font-bold tracking-tight">{item}</span>
               </a>
@@ -129,7 +129,7 @@ export default function Footer() {
           </h4>
           <div className="flex flex-col gap-1">
             {["Pemerintah Kota Surakarta", "PPID Kota Surakarta", "Solo Data", "Kominfo RI"].map((item) => (
-              <a key={item} href="#" className="flex items-center gap-2 text-blue-300/65 text-xs py-2 hover:text-white transition-all group border-b border-white/5 last:border-0">
+              <a key={item} href="#" className="flex items-center gap-2 text-accent-300/65 text-xs py-2 hover:text-white transition-all group border-b border-white/5 last:border-0">
                 <ChevronRight size={10} className="text-[#29A8E0]/50 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                 <span className="font-bold tracking-tight">{item}</span>
               </a>
@@ -148,7 +148,7 @@ export default function Footer() {
                 key={stat.label}
                 className="flex items-center justify-between py-2.5 border-b border-white/[0.07] last:border-0"
               >
-                <span className="text-blue-300/65 text-[11px] font-bold uppercase tracking-tight">{stat.label}</span>
+                <span className="text-accent-300/65 text-[11px] font-bold uppercase tracking-tight">{stat.label}</span>
                 <span className="text-white font-black text-sm tabular-nums tracking-tighter">
                   {stat.value}
                 </span>
@@ -160,7 +160,7 @@ export default function Footer() {
 
       {/* 3. BOTTOM BAR */}
       <div className="border-t border-white/[0.07] px-6 py-6 text-center sm:text-left">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-blue-300/40 text-[10px] font-bold uppercase tracking-[0.15em]">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-accent-300/40 text-[10px] font-bold uppercase tracking-[0.15em]">
           <p>© 2026 — Pemerintah Kota Surakarta. Hak cipta dilindungi undang-undang.</p>
           <p className="text-[#29A8E0]/60 uppercase">Dinas Komunikasi Informatika dan Persandian Kota Surakarta</p>
         </div>

@@ -15,7 +15,7 @@ const SKMStatsCard = ({ stats }) => {
         <div>
           <span className="text-xs font-bold text-slate-400">IKM</span>
           <h1 className="text-5xl font-black text-slate-900">{stats.ikm || 0}</h1>
-          <p className="text-sm font-bold text-blue-600 uppercase mt-1">{stats.mutu || '-'}</p>
+          <p className="text-sm font-bold text-primary-700 uppercase mt-1">{stats.mutu || '-'}</p>
 
           <div className="mt-6 text-xs text-slate-500 space-y-1">
             <p>Responden : <strong className="text-slate-800">{stats.total_responden || 0} Orang</strong></p>
@@ -76,14 +76,13 @@ const SKMSurveyForm = () => {
       .catch(err => console.error("Gagal ambil statistik:", err));
   };
 
-  // Fetch daftar layanan & statistik saat komponen dimuat (BERSIH DARI GIT CONFLIC)
+  // Fetch daftar layanan & statistik saat komponen dimuat
   useEffect(() => {
-    fetchStats();
 
-    api.get('/layanans')
-      .then(res => setServices(res.data.data || res.data))
-      .catch(err => console.error("Gagal memuat layanan:", err));
-  }, []);
+  api.get('/layanan')
+    .then(res => setServices(res.data))
+    .catch(err => console.error('Gagal memuat daftar layanan:', err));
+}, []);
 
   const handleServiceChange = (e) => {
     const id = e.target.value;
@@ -155,7 +154,7 @@ const SKMSurveyForm = () => {
 
         <form onSubmit={handleSubmit} className="space-y-10">
           {/* SECTION 1: PILIH LAYANAN */}
-          <div className="bg-blue-50/80 p-6 rounded-2xl border border-blue-100">
+          <div className="bg-primary-50/80 p-6 rounded-2xl border border-primary-100">
             <label className="block text-sm font-bold text-slate-700 mb-2">
               Jenis Layanan yang Diterima <span className="text-red-500">*</span>
             </label>
@@ -164,7 +163,7 @@ const SKMSurveyForm = () => {
               required
               value={formData.jenis_layanan_id}
               onChange={handleServiceChange}
-              className="w-full p-3.5 rounded-xl border-2 border-white bg-white shadow-sm outline-none focus:border-blue-500 font-medium text-slate-700"
+              className="w-full p-3.5 rounded-xl border-2 border-white bg-white shadow-sm outline-none focus:border-primary font-medium text-slate-700"
             >
               <option value="">--- Pilih Jenis Layanan ---</option>
               {services.map(s => (
@@ -176,29 +175,29 @@ const SKMSurveyForm = () => {
           {/* SECTION 2: PROFIL RESPONDEN */}
           {selectedServiceName && (
             <div className="space-y-6 animate-in fade-in duration-500 border-b pb-8">
-              <h2 className="text-lg font-black text-slate-900 uppercase flex items-center gap-2 border-l-4 border-blue-600 pl-3">
-                <UserCheck className="w-5 h-5 text-blue-600" /> Data Responden
+              <h2 className="text-lg font-black text-slate-900 uppercase flex items-center gap-2 border-l-4 border-primary pl-3">
+                <UserCheck className="w-5 h-5 text-primary-700" /> Data Responden
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">Nama Lengkap *</label>
-                  <input type="text" name="nama" required value={formData.nama} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama" />
+                  <input type="text" name="nama" required value={formData.nama} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-primary/40" placeholder="Masukkan nama" />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">No. WhatsApp *</label>
-                  <input type="text" name="no_whatsapp" required value={formData.no_whatsapp} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="08xxxxxxxxxx" />
+                  <input type="text" name="no_whatsapp" required value={formData.no_whatsapp} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-primary/40" placeholder="08xxxxxxxxxx" />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">Usia (Tahun) *</label>
-                  <input type="number" name="usia" required value={formData.usia} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="Contoh: 25" />
+                  <input type="number" name="usia" required value={formData.usia} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-primary/40" placeholder="Contoh: 25" />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">Jenis Kelamin *</label>
-                  <select name="jenis_kelamin" required value={formData.jenis_kelamin} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-blue-500">
+                  <select name="jenis_kelamin" required value={formData.jenis_kelamin} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-primary/40">
                     <option value="">-- Pilih --</option>
                     <option value="L">Laki-laki</option>
                     <option value="P">Perempuan</option>
@@ -207,22 +206,22 @@ const SKMSurveyForm = () => {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">Pendidikan *</label>
-                  <input type="text" name="pendidikan" required value={formData.pendidikan} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="SMA / S1 / S2 / dll" />
+                  <input type="text" name="pendidikan" required value={formData.pendidikan} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-primary/40" placeholder="SMA / S1 / S2 / dll" />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">Pekerjaan *</label>
-                  <input type="text" name="pekerjaan" required value={formData.pekerjaan} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="PNS / Swasta / Mahasiswa / dll" />
+                  <input type="text" name="pekerjaan" required value={formData.pekerjaan} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-primary/40" placeholder="PNS / Swasta / Mahasiswa / dll" />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">Kecamatan *</label>
-                  <input type="text" name="kecamatan" required value={formData.kecamatan} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="Kecamatan" />
+                  <input type="text" name="kecamatan" required value={formData.kecamatan} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-primary/40" placeholder="Kecamatan" />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">Kelurahan *</label>
-                  <input type="text" name="kelurahan" required value={formData.kelurahan} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="Kelurahan" />
+                  <input type="text" name="kelurahan" required value={formData.kelurahan} onChange={handleChange} className="w-full p-3 rounded-xl border bg-slate-50 focus:bg-white outline-none focus:ring-2 focus:ring-primary/40" placeholder="Kelurahan" />
                 </div>
               </div>
             </div>
@@ -231,8 +230,8 @@ const SKMSurveyForm = () => {
           {/* SECTION 3: PERTANYAAN SURVEI */}
           {selectedServiceName && (
             <div className="space-y-8 animate-in fade-in duration-500">
-              <h2 className="text-lg font-black text-slate-900 uppercase flex items-center gap-2 border-l-4 border-blue-600 pl-3">
-                <ClipboardList className="w-5 h-5 text-blue-600" /> Pendapat Responden Tentang Pelayanan
+              <h2 className="text-lg font-black text-slate-900 uppercase flex items-center gap-2 border-l-4 border-primary pl-3">
+                <ClipboardList className="w-5 h-5 text-primary-700" /> Pendapat Responden Tentang Pelayanan
               </h2>
 
               <QuestionItem id="1" q={`Bagaimana pendapat saudara tentang kesesuaian persyaratan pelayanan ${selectedServiceName} yang diberikan?`} name="jawaban_1" options={["Sangat Sesuai", "Sesuai", "Kurang Sesuai", "Tidak Sesuai"]} onChange={handleChange} />
@@ -247,10 +246,10 @@ const SKMSurveyForm = () => {
 
               <div className="pt-6">
                 <label className="block text-sm font-bold text-slate-700 mb-3">Saran dan Masukan</label>
-                <textarea name="saran" rows="4" value={formData.saran} onChange={handleChange} className="w-full p-4 rounded-2xl border-2 border-slate-100 bg-slate-50 focus:bg-white focus:border-blue-500 outline-none transition" placeholder="Masukkan saran anda..."></textarea>
+                <textarea name="saran" rows="4" value={formData.saran} onChange={handleChange} className="w-full p-4 rounded-2xl border-2 border-slate-100 bg-slate-50 focus:bg-white focus:border-primary outline-none transition" placeholder="Masukkan saran anda..."></textarea>
               </div>
 
-              <button disabled={loading} type="submit" className="w-full py-4 bg-blue-600 text-white rounded-2xl font-black text-lg hover:bg-slate-900 transition-all flex items-center justify-center gap-3 shadow-lg hover:shadow-xl disabled:bg-slate-400">
+              <button disabled={loading} type="submit" className="w-full py-4 bg-primary text-white rounded-2xl font-black text-lg hover:bg-slate-900 transition-all flex items-center justify-center gap-3 shadow-lg hover:shadow-xl disabled:bg-slate-400">
                 {loading ? 'Memproses...' : <><Save className="w-5 h-5" /> SIMPAN SURVEI</>}
               </button>
             </div>
@@ -275,8 +274,8 @@ const QuestionItem = ({ id, q, name, options, onChange }) => (
     <p className="text-slate-800 font-bold leading-relaxed">{id}. {q} <span className="text-red-500">*</span></p>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
       {options.map((opt, i) => (
-        <label key={i} className="flex items-center gap-3 p-3.5 rounded-xl border-2 border-slate-100 hover:border-blue-200 cursor-pointer transition-all bg-slate-50/50 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50/50 font-medium text-sm text-slate-700">
-          <input type="radio" name={name} value={opt} required onChange={onChange} className="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+        <label key={i} className="flex items-center gap-3 p-3.5 rounded-xl border-2 border-slate-100 hover:border-primary-200 cursor-pointer transition-all bg-slate-50/50 has-[:checked]:border-primary has-[:checked]:bg-primary-50/50 font-medium text-sm text-slate-700">
+          <input type="radio" name={name} value={opt} required onChange={onChange} className="w-4 h-4 text-primary focus:ring-primary/40" />
           {opt}
         </label>
       ))}

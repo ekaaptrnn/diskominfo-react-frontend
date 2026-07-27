@@ -24,22 +24,22 @@ export default function Navbar({ dark, toggleDark }) {
         style={{ background: "#1c2030" }}
       >
         <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
-          <span className="flex items-center gap-2 text-blue-300/70 text-[11px] font-bold uppercase tracking-wider">
-            <Clock size={12} className="text-[#29A8E0]" />
+          <span className="flex items-center gap-2 text-accent-300/70 text-[11px] font-bold uppercase tracking-wider">
+            <Clock size={12} className="text-accent-300" />
             {currentDateTime}
           </span>
           
           <div className="flex items-center gap-1">
             <div className="flex items-center gap-3 pr-4 border-r border-white/15">
-            <i className="bi bi-instagram text-blue-300/60 hover:text-white cursor-pointer transition-all text-[14px]"></i>
-            <i className="bi bi-facebook text-blue-300/60 hover:text-white cursor-pointer transition-all text-[14px]"></i>
-            <i className="bi bi-youtube text-blue-300/60 hover:text-white cursor-pointer transition-all text-[14px]"></i>
+            <i className="bi bi-instagram text-accent-300/60 hover:text-white cursor-pointer transition-all text-[14px]"></i>
+            <i className="bi bi-facebook text-accent-300/60 hover:text-white cursor-pointer transition-all text-[14px]"></i>
+            <i className="bi bi-youtube text-accent-300/60 hover:text-white cursor-pointer transition-all text-[14px]"></i>
             </div>
-            <a href="tel:02718060" className="pl-4 text-blue-300/70 text-[11px] font-bold hover:text-white transition-colors">
+            <a href="tel:02718060" className="pl-4 text-accent-300/70 text-[11px] font-bold hover:text-white transition-colors">
               (0271) 806060
             </a>
             <span className="mx-2 text-white/10">|</span>
-            <a href="mailto:diskominfosp@surakarta.go.id" className="text-blue-300/70 text-[11px] font-bold hover:text-white transition-colors">
+            <a href="mailto:diskominfosp@surakarta.go.id" className="text-accent-300/70 text-[11px] font-bold hover:text-white transition-colors">
               diskominfosp@surakarta.go.id
             </a>
           </div>
@@ -51,7 +51,7 @@ export default function Navbar({ dark, toggleDark }) {
         <div
           className="max-w-7xl mx-auto rounded-2xl border border-white/20 px-6 py-3 flex items-center justify-between shadow-2xl"
           style={{
-            background: "rgba(30,79,146,0.95)",
+            background: "color-mix(in srgb, var(--color-primary) 95%, transparent)",
             backdropFilter: "blur(20px)",
             boxShadow: "0 10px 30px -10px rgba(0,0,0,0.3)",
           }}
@@ -63,7 +63,7 @@ export default function Navbar({ dark, toggleDark }) {
             </div>
             <div className="leading-none border-l border-white/20 pl-4">
               <h1 className="font-black text-sm text-white tracking-tighter uppercase">Diskominfo SP</h1>
-              <p className="text-[8px] font-bold text-blue-200 uppercase tracking-[0.2em] mt-0.5">Kota Surakarta</p>
+              <p className="text-[8px] font-bold text-accent-200 uppercase tracking-[0.2em] mt-0.5">Kota Surakarta</p>
             </div>
           </Link>
 
@@ -82,12 +82,12 @@ export default function Navbar({ dark, toggleDark }) {
                     to={item.href.startsWith('#') ? '#' : item.href}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl text-[11px] font-extrabold uppercase tracking-tight text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
                   >
-                    {Icon && <Icon size={14} className="text-[#29A8E0]" />}
+                    {Icon && <Icon size={14} className="text-accent-300" />}
                     {item.label}
                     {item.sub && (
                       <ChevronDown
                         size={10}
-                        className={`text-[#29A8E0]/70 transition-transform duration-300 ${drop === item.label ? "rotate-180" : ""}`}
+                        className={`text-accent-300/70 transition-transform duration-300 ${drop === item.label ? "rotate-180" : ""}`}
                       />
                     )}
                   </Link>
@@ -110,7 +110,7 @@ export default function Navbar({ dark, toggleDark }) {
                           <Link
                             key={s}
                             to={routeMap[s] || "/"}
-                            className="block px-5 py-3 text-[12px] text-[#1e4f92] font-bold hover:bg-blue-50 transition-colors border-b border-slate-50 last:border-0"
+                            className="block px-5 py-3 text-[12px] text-primary font-bold hover:bg-primary-50 transition-colors border-b border-slate-50 last:border-0"
                           >
                             {s}
                           </Link>
@@ -130,7 +130,7 @@ export default function Navbar({ dark, toggleDark }) {
             </button>
             <button className="w-9 h-9 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all relative">
               <Bell size={16} />
-              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-rose-500 border-2 border-[#1e4f92]" />
+              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-rose-500 border-2 border-primary" />
             </button>
             <button
               onClick={toggleDark}
@@ -158,9 +158,9 @@ export default function Navbar({ dark, toggleDark }) {
                 key={item.label}
                 to={item.href.startsWith('#') ? '#' : item.href}
                 onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-4 px-5 py-3.5 rounded-xl text-xs font-black uppercase text-[#1e4f92] hover:bg-blue-50 transition-all"
+                className="flex items-center gap-4 px-5 py-3.5 rounded-xl text-xs font-black uppercase text-primary hover:bg-primary-50 transition-all"
               >
-                {iconMap[item.icon] && <item.icon size={16} className="text-[#29A8E0]" />}
+                {iconMap[item.icon] && <item.icon size={16} className="text-accent-300" />}
                 {item.label}
               </Link>
             ))}

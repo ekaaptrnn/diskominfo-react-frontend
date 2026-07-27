@@ -101,7 +101,7 @@ export default function Tupoksi() {
             <div key={unit.id} className="border border-slate-100 rounded-[2rem] overflow-hidden">
               <button
                 onClick={() => toggle(unit.id)}
-                className="w-full flex items-center justify-between gap-4 p-5 md:p-6 hover:bg-sky-50/50 transition text-left"
+                className="w-full flex items-center justify-between gap-4 p-5 md:p-6 hover:bg-accent-50/50 transition text-left"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-primary text-white rounded-xl flex items-center justify-center shrink-0">

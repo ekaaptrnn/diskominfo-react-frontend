@@ -5,9 +5,9 @@ const services = [
   { name: "LAPOR SP4N", sub: "Aduan Nasional", icon: "bi-megaphone-fill", color: "bg-rose-500" },
   { name: "Lapor Gub", sub: "Aduan Provinsi", icon: "bi-bank2", color: "bg-orange-500" },
   { name: "ULAS", sub: "Aduan Kota Solo", icon: "bi-chat-left-text-fill", color: "bg-emerald-500" },
-  { name: "Lapor Mas Wali", sub: "Aduan Langsung", icon: "bi-person-badge-fill", color: "bg-blue-600" },
+  { name: "Lapor Mas Wali", sub: "Aduan Langsung", icon: "bi-person-badge-fill", color: "bg-primary" },
   { name: "KONATA", icon: "bi-headset", sub: "Layanan Disabilitas", color: "bg-purple-600" },
-  { name: "Solo Data", sub: "Portal Data Terbuka", icon: "bi-bar-chart-line-fill", color: "bg-sky-500" },
+  { name: "Solo Data", sub: "Portal Data Terbuka", icon: "bi-bar-chart-line-fill", color: "bg-accent-500" },
   { name: "PPID Pelaksana", sub: "Informasi Publik", icon: "bi-file-earmark-lock-fill", color: "bg-pink-600" },
   { name: "Fasilitas Publik", sub: "Akses Sarpras", icon: "bi-building-fill-check", color: "bg-indigo-600" },
 ];

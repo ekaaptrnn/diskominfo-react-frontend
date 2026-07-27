@@ -94,7 +94,7 @@ export default function PPIDPage() {
                           <span className="text-[10px] font-bold text-slate-300 uppercase">{doc.kategori}</span>
                         </td>
                         <td className="py-5 px-4">
-                          <span className="bg-sky-50 text-primary px-2 py-1 rounded text-[9px] font-black">{doc.format}</span>
+                          <span className="bg-accent-50 text-primary-700 px-2 py-1 rounded text-[9px] font-black">{doc.format}</span>
                         </td>
                         <td className="py-5 px-4 text-xs font-bold text-slate-400">{doc.ukuran}</td>
                         <td className="py-5 px-4 text-right">

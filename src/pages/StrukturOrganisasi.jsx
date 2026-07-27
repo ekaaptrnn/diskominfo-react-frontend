@@ -67,7 +67,7 @@ export default function StrukturOrganisasi() {
 
           {pejabatBidang.length > 0 && (
             <>
-              <h2 className="text-center text-lg font-black text-slate-700 uppercase tracking-widest mb-10">Pejabat Bidang</h2>
+              <h2 className="text-center text-lg font-black text-slate-700 uppercase tracking-widest mb-10">Anggota Bidang</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 {pejabatBidang.map((p) => (
                   <div key={p.id} className="text-center bg-white rounded-3xl border border-slate-100 p-6 hover:shadow-lg transition">

@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/layout/Navbar"; // N Besar
 import Footer from "./components/layout/footer"; // f Kecil sesuai gambar folder Anda
@@ -25,6 +26,7 @@ const AppContent = () => {
       
       <main className="flex-grow">
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="/visi-misi" element={<VisiMisi />} />
           <Route path="/tupoksi" element={<Tupoksi />} />

@@ -5,8 +5,8 @@ export default function HelpSection() {
     <section className="py-20 bg-slate-50/50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-white text-sky-600 px-4 py-1.5 rounded-full mb-4 font-bold text-[10px] uppercase border border-sky-100 shadow-sm">
-             <span className="w-1.5 h-1.5 bg-sky-600 rounded-full animate-bounce"></span> Pusat Bantuan
+          <div className="inline-flex items-center gap-2 bg-white text-accent-700 px-4 py-1.5 rounded-full mb-4 font-bold text-[10px] uppercase border border-accent-100 shadow-sm">
+             <span className="w-1.5 h-1.5 bg-accent-600 rounded-full animate-bounce"></span> Pusat Bantuan
           </div>
           <h2 className="text-4xl font-black text-slate-800 mb-2 tracking-tighter">Pusat Bantuan & Interaksi</h2>
           <p className="text-slate-400 font-medium">Temukan jawaban atau hubungi asisten virtual kami</p>
@@ -14,7 +14,7 @@ export default function HelpSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
           {/* 1. Chat BOT MONIKS (UI Only) */}
-          <div className="bg-white rounded-[2.5rem] border border-sky-100 shadow-2xl overflow-hidden flex flex-col h-[450px]">
+          <div className="bg-white rounded-[2.5rem] border border-accent-100 shadow-2xl overflow-hidden flex flex-col h-[450px]">
              <div className="bg-primary p-6 text-white flex justify-between items-center">
                 <div className="flex gap-4 items-center">
                    <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl shadow-inner"><i className="bi bi-robot"></i></div>
@@ -29,18 +29,18 @@ export default function HelpSection() {
              </div>
              
              <div className="flex-1 p-6 space-y-4 overflow-y-auto bg-slate-50/50">
-                <div className="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-[11px] text-slate-600 border border-sky-50 leading-relaxed max-w-[85%]">
+                <div className="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-[11px] text-slate-600 border border-accent-50 leading-relaxed max-w-[85%]">
                    Halo! Saya MONIKS, asisten virtual Diskominfo SP Surakarta. Ada yang bisa saya bantu hari ini?
                 </div>
                 <div className="bg-primary p-4 rounded-2xl rounded-tr-none shadow-sm text-[11px] text-white leading-relaxed max-w-[80%] ml-auto font-medium">
                    Bagaimana cara permohonan informasi PPID?
                 </div>
-                <div className="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-[11px] text-slate-600 border border-sky-50 leading-relaxed max-w-[85%]">
+                <div className="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-[11px] text-slate-600 border border-accent-50 leading-relaxed max-w-[85%]">
                    Kunjungi menu <strong>PPID</strong> di website ini atau Anda bisa datang langsung ke Gedung Bale Upakari Lantai 3. 😊
                 </div>
              </div>
              
-             <div className="p-4 border-t border-sky-50 bg-white flex gap-2">
+             <div className="p-4 border-t border-accent-50 bg-white flex gap-2">
                 <input className="flex-1 bg-slate-100 border-none rounded-xl px-4 text-xs font-medium focus:ring-1 focus:ring-primary/20 transition-all" placeholder="Ketik pertanyaan Anda..." />
                 <button className="w-10 h-10 bg-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-primary/30 active:scale-90 transition"><i className="bi bi-send-fill text-sm"></i></button>
              </div>
@@ -49,7 +49,7 @@ export default function HelpSection() {
           {/* 2. FAQ & SKM Link */}
           <div className="lg:col-span-2 flex flex-col gap-4">
              {/* FAQ Accordion Preview */}
-             <div className="bg-white p-6 rounded-[2rem] border border-sky-100 flex justify-between items-center group cursor-pointer hover:bg-sky-50 transition">
+             <div className="bg-white p-6 rounded-[2rem] border border-accent-100 flex justify-between items-center group cursor-pointer hover:bg-accent-50 transition">
                 <div className="flex items-center gap-6">
                    <div className="w-12 h-12 bg-orange-100 text-orange-500 rounded-2xl flex items-center justify-center text-xl"><i className="bi bi-question-circle-fill"></i></div>
                    <div>
@@ -62,7 +62,7 @@ export default function HelpSection() {
 
              <div className="space-y-3">
                 {['Layanan apa saja yang tersedia di Diskominfo?', 'Apakah layanan informasi publik dikenakan biaya?', 'Bagaimana cara melaporkan aduan melalui ULAS?'].map((q, i) => (
-                   <div key={i} className="bg-white p-5 px-8 rounded-2xl border border-sky-50 text-[11px] font-bold text-slate-600 flex justify-between items-center hover:border-primary/20 transition-colors cursor-pointer group">
+                   <div key={i} className="bg-white p-5 px-8 rounded-2xl border border-accent-50 text-[11px] font-bold text-slate-600 flex justify-between items-center hover:border-primary/20 transition-colors cursor-pointer group">
                       {q} <i className="bi bi-plus-lg text-slate-300 group-hover:text-primary"></i>
                    </div>
                 ))}
@@ -86,7 +86,7 @@ export default function HelpSection() {
         </div>
 
         {/* 3. STATISTIK PENGUNJUNG - Sesuai Poin #17 */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white p-10 rounded-[3rem] border border-sky-100 shadow-sm text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white p-10 rounded-[3rem] border border-accent-100 shadow-sm text-center">
            <div className="group">
               <h3 className="text-4xl font-black text-primary tracking-tighter group-hover:scale-110 transition">243</h3>
               <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-3">Hari Ini</p>

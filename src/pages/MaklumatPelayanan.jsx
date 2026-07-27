@@ -6,7 +6,7 @@ const prinsipLayanan = [
     title: 'Melayani dengan Sopan & Santun',
     desc: 'Setiap petugas wajib memberikan pelayanan yang ramah, sopan, dan santun kepada setiap pemohon layanan.',
     icon: MessageCircleHeart,
-    color: 'bg-sky-100 text-sky-600',
+    color: 'bg-accent-100 text-accent-700',
   },
   {
     title: 'Tepat Waktu & Tepat Sasaran',

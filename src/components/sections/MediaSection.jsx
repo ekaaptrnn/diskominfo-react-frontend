@@ -16,13 +16,13 @@ export default function MediaSection() {
               {[1, 2, 3].map((_, i) => (
                 <div key={i} className="flex items-center justify-between p-4 hover:bg-slate-50 rounded-2xl transition group">
                   <div className="flex gap-4 items-center">
-                    <div className="w-10 h-10 bg-sky-100 text-primary rounded-xl flex items-center justify-center"><i className="bi bi-file-earmark-pdf"></i></div>
+                    <div className="w-10 h-10 bg-accent-100 text-primary-700 rounded-xl flex items-center justify-center"><i className="bi bi-file-earmark-pdf"></i></div>
                     <div>
                       <h4 className="text-[11px] font-bold text-slate-700">Laporan Statistik Sektoral Surakarta 2026</h4>
                       <p className="text-[9px] text-slate-400 uppercase font-medium">1.4 MB — PDF</p>
                     </div>
                   </div>
-                  <button className="w-8 h-8 rounded-full flex items-center justify-center text-primary bg-sky-50 opacity-0 group-hover:opacity-100 transition"><i className="bi bi-download"></i></button>
+                  <button className="w-8 h-8 rounded-full flex items-center justify-center text-primary-700 bg-accent-50 opacity-0 group-hover:opacity-100 transition"><i className="bi bi-download"></i></button>
                 </div>
               ))}
             </div>

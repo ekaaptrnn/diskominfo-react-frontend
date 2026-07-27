@@ -25,7 +25,7 @@ export default function UnduhanSection() {
               href={`${BASE_URL}/storage/${doc.file_path || doc.file}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#eef6ff] p-4 flex justify-between items-center border border-sky-100 hover:bg-sky-100 cursor-pointer transition no-underline block"
+              className="bg-accent-50 p-4 flex justify-between items-center border border-accent-100 hover:bg-accent-100 cursor-pointer transition no-underline block"
             >
               <span className="text-sm font-bold text-slate-700 tracking-tight">
                 {doc.judul || doc.nama_dokumen || doc}

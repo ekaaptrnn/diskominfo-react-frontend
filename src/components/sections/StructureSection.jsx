@@ -17,7 +17,7 @@ export default function StructureSection() {
           {pimpinan.map((p, i) => (
             <div key={i} className="text-center group">
               <div className="relative inline-block">
-                <div className="absolute -inset-2 bg-gradient-to-tr from-primary to-sky-300 rounded-full blur opacity-20 group-hover:opacity-40 transition"></div>
+                <div className="absolute -inset-2 bg-gradient-to-tr from-primary to-accent-300 rounded-full blur opacity-20 group-hover:opacity-40 transition"></div>
                 <img src={p.foto} className="relative w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-white shadow-2xl" alt={p.nama} />
               </div>
               <h3 className="mt-8 font-black text-xl text-slate-800 leading-tight">{p.nama}</h3>

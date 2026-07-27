@@ -3,6 +3,7 @@ import { Search, Menu, X, ChevronDown, Bell, Moon, Sun, Home, FileText, Info, St
 import { Link } from "react-router-dom";
 import { useDateTime } from "@/hooks/useDateTime";
 import { navMenus } from "../../data";
+import { useState, useRef } from "react";
 
 // Mapping icon string ke komponen Lucide
 const iconMap = {

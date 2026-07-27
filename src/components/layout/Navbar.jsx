@@ -105,6 +105,11 @@ export default function Navbar({ dark, toggleDark }) {
                           "Struktur Organisasi": "/struktur",
                           "Maklumat Layanan": "/maklumat",
                           "Standar Layanan": "/maklumat",
+                          "Daftar Informasi Publik": "/ppid?tab=Daftar+Informasi+Publik",
+                          "Informasi Berkala": "/ppid?tab=Informasi+Berkala",
+                          "Informasi Setiap Saat": "/ppid?tab=Informasi+Setiap+Saat",
+                          "Informasi Serta Merta": "/ppid?tab=Informasi+Serta+Merta",
+                          "Informasi Dikecualikan": "/ppid?tab=Informasi+Dikecualikan",
                         };
                         return (
                           <Link

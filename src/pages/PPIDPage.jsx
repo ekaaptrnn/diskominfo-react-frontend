@@ -1,9 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { FileText, ShieldCheck, Zap, Lock, Users, Info, Scale, Award, Download, Search, ChevronRight } from 'lucide-react';
-import { ppidDocuments } from '../data';
+import { api, BASE_URL } from '../services/api';
 
 export default function PPIDPage() {
-  const [activeTab, setActiveTab] = useState('Daftar Informasi Publik');
+  const [searchParams] = useSearchParams();
+  const tabFromUrl = searchParams.get('tab');
+
+  const [activeTab, setActiveTab] = useState(tabFromUrl || 'Daftar Informasi Publik');
+  const [dokumen, setDokumen] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Kalau user klik menu PPID lagi dari navbar saat sudah di halaman ini, ikut update tab-nya
+  useEffect(() => {
+    if (tabFromUrl) setActiveTab(tabFromUrl);
+  }, [tabFromUrl]);
+
+  useEffect(() => {
+    let isMounted = true;
+    api.get('/dokumen')
+      .then((res) => {
+        const data = res.data.data || res.data || [];
+        if (isMounted) setDokumen(data);
+      })
+      .catch((err) => console.error('Gagal memuat dokumen PPID:', err))
+      .finally(() => { if (isMounted) setLoading(false); });
+    return () => { isMounted = false; };
+  }, []);
+
+  // "Daftar Informasi Publik" = gabungan semua kategori; tab lain difilter persis namanya
+  const filteredDokumen = useMemo(() => {
+    return dokumen
+      .filter((doc) => activeTab === 'Daftar Informasi Publik' || doc.kategori === activeTab)
+      .filter((doc) => doc.judul.toLowerCase().includes(searchTerm.toLowerCase()));
+  }, [dokumen, activeTab, searchTerm]);
+
+  const getFileUrl = (doc) => `${BASE_URL}/storage/${doc.file_path}`;
 
   // Menu Sidebar sesuai Poin #8
   const menuPPID = [
@@ -67,13 +100,26 @@ export default function PPIDPage() {
             </h2>
             <div className="hidden md:flex relative">
               <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" />
-              <input type="text" placeholder="Cari dokumen..." className="pl-12 pr-6 py-2.5 bg-slate-50 border-none rounded-xl text-xs font-bold" />
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Cari dokumen..."
+                className="pl-12 pr-6 py-2.5 bg-slate-50 border-none rounded-xl text-xs font-bold"
+              />
             </div>
           </div>
 
           {/* RENDER CONTENT BASED ON TAB */}
           <section className="animate-in fade-in duration-500">
             {activeTab.includes("Informasi") ? (
+              loading ? (
+                <div className="py-20 text-center text-slate-400 font-bold">Memuat dokumen...</div>
+              ) : filteredDokumen.length === 0 ? (
+                <div className="py-20 text-center text-slate-300 font-black uppercase tracking-widest italic">
+                  Belum ada dokumen untuk kategori ini.
+                </div>
+              ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
                   <thead>
@@ -85,7 +131,7 @@ export default function PPIDPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-50">
-                    {ppidDocuments.map((doc) => (
+                    {filteredDokumen.map((doc) => (
                       <tr key={doc.id} className="group hover:bg-slate-50 transition-colors">
                         <td className="py-5 px-4">
                           <p className="text-sm font-extrabold text-slate-700 leading-tight group-hover:text-primary transition-colors">
@@ -96,17 +142,24 @@ export default function PPIDPage() {
                         <td className="py-5 px-4">
                           <span className="bg-accent-50 text-primary-700 px-2 py-1 rounded text-[9px] font-black">{doc.format}</span>
                         </td>
-                        <td className="py-5 px-4 text-xs font-bold text-slate-400">{doc.ukuran}</td>
+                        <td className="py-5 px-4 text-xs font-bold text-slate-400">{doc.ukuran_formatted}</td>
                         <td className="py-5 px-4 text-right">
-                          <button className="inline-flex items-center gap-2 bg-slate-900 text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-tighter hover:bg-primary transition-all shadow-lg active:scale-95">
+                          <a
+                            href={getFileUrl(doc)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download
+                            className="inline-flex items-center gap-2 bg-slate-900 text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-tighter hover:bg-primary transition-all shadow-lg active:scale-95"
+                          >
                             <Download size={12} /> Unduh
-                          </button>
+                          </a>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
+              )
             ) : activeTab === "Pemohon Informasi" ? (
               <div className="max-w-2xl">
                 <p className="text-sm font-medium text-slate-500 leading-loose mb-8">

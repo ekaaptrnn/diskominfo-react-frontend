@@ -13,6 +13,7 @@ import PublikasiDetail from "./pages/PublikasiDetail";
 import SKMForm from "./pages/SKMForm";
 import MaklumatPelayanan from "./pages/MaklumatPelayanan";
 import PPIDPage from "./pages/PPIDPage";
+import StrukturOrganisasi from "./pages/StrukturOrganisasi";
 import Login from './pages/Login';
 
 
@@ -37,6 +38,7 @@ const AppContent = () => {
           <Route path="/skm" element={<SKMForm />} />
           <Route path="/maklumat" element={<MaklumatPelayanan />} />
           <Route path="/ppid" element={<PPIDPage />} />
+          <Route path="/struktur" element={<StrukturOrganisasi />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </main>

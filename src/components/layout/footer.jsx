@@ -3,6 +3,18 @@ import { MapPin, Info, ExternalLink, Users, ChevronRight } from "lucide-react";
 import { visitorStats } from '../../data';
 import axios from "axios";
 
+<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+  {visitorStats.map((stat, i) => (
+    <div key={i} className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-[2rem] text-center">
+      <p className="text-[10px] font-black text-blue-300 uppercase tracking-[0.2em] mb-2">{stat.label}</p>
+      <h4 className="text-2xl font-black text-white tracking-tighter">
+        {/* Simulasi hitung cepat (Odometer effect) */}
+        {stat.value.toLocaleString()}
+      </h4>
+    </div>
+  ))}
+</div>
+
 export default function Footer() {
   // State untuk menampung data statistik dari Backend
   const [visitorStats, setVisitorStats] = useState([

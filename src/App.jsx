@@ -1,9 +1,8 @@
-
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import Navbar from "./components/layout/Navbar"; // N Besar
-import Footer from "./components/layout/footer"; // f Kecil sesuai gambar folder Anda
+import Navbar from "./components/layout/Navbar"; 
+import Footer from "./components/layout/footer"; 
 
-// Pages
+// --- PAGES PUBLIK ---
 import Home from "./pages/Home";
 import VisiMisi from "./pages/VisiMisi";
 import Tupoksi from "./pages/Tupoksi";
@@ -16,19 +15,23 @@ import PPIDPage from "./pages/PPIDPage";
 import StrukturOrganisasi from "./pages/StrukturOrganisasi";
 import Login from './pages/Login';
 
+import KelolaLayanan from "./pages/admin/KelolaLayanan";
+import EditSKM from "./pages/admin/EditSKM";
 
 const AppContent = () => {
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login';
+  
+  // Logika: Sembunyikan Navbar & Footer jika di halaman Login ATAU halaman yang berawalan /admin
+  const hideLayout = location.pathname === '/login' || location.pathname.startsWith('/admin');
 
   return (
     <div className="antialiased bg-slate-50 min-h-screen flex flex-col font-sans">
-      {/* Navbar hanya muncul jika BUKAN halaman login */}
-      {!isLoginPage && <Navbar />}
+      {/* Navbar muncul jika BUKAN login & BUKAN admin */}
+      {!hideLayout && <Navbar />}
       
       <main className="flex-grow">
         <Routes>
-          
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/visi-misi" element={<VisiMisi />} />
           <Route path="/tupoksi" element={<Tupoksi />} />
@@ -40,16 +43,22 @@ const AppContent = () => {
           <Route path="/ppid" element={<PPIDPage />} />
           <Route path="/struktur" element={<StrukturOrganisasi />} />
           <Route path="/login" element={<Login />} />
+
+          {/* Admin Routes (Gunakan path /admin/...) */}
+          <Route path="/admin/layanan" element={<KelolaLayanan />} />
+          <Route path="/admin/skm" element={<EditSKM />} />
+          
+          {/* Opsional: Dashboard Utama Admin */}
+          <Route path="/admin/dashboard" element={<KelolaLayanan />} />
         </Routes>
       </main>
 
-      {/* Footer hanya muncul jika BUKAN halaman login */}
-      {!isLoginPage && <Footer />}
+      {/* Footer muncul jika BUKAN login & BUKAN admin */}
+      {!hideLayout && <Footer />}
     </div>
   );
 };
 
-// 2. Fungsi App utama sekarang hanya memanggil Router dan AppContent
 function App() {
   return (
     <Router>

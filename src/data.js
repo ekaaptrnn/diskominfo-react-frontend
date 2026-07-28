@@ -1,18 +1,27 @@
 // src/data.js
-
 export const navMenus = [
   { label: "Home", href: "/", icon: "Home" },
   { 
     label: "PPID", 
-    href: "#", 
+    href: "/ppid", 
     icon: "FileText",
-    sub: ["Daftar Informasi Publik", "Informasi Berkala", "Informasi Setiap Saat", "Informasi Serta Merta", "Informasi Dikecualikan"]
+    sub: [
+      { label: "Daftar Informasi Publik", href: "/ppid?tab=daftar" },
+      { label: "Informasi Berkala", href: "/ppid?tab=berkala" },
+      { label: "Informasi Setiap Saat", href: "/ppid?tab=setiap-saat" },
+      { label: "Informasi Serta Merta", href: "/ppid?tab=serta-merta" },
+      { label: "Informasi Dikecualikan", href: "/ppid?tab=dikecualikan" }
+    ]
   },
   { 
     label: "Profil", 
     href: "#", 
     icon: "Info",
-    sub: ["Visi & Misi", "Struktur Organisasi", "Tupoksi"]
+    sub: [
+      { label: "Visi & Misi", href: "/visi-misi" },
+      { label: "Struktur Organisasi", href: "/struktur" },
+      { label: "Tupoksi", href: "/tupoksi" }
+    ]
   },
   { label: "SKM", href: "/skm", icon: "Star" },
   { label: "Informasi", href: "/artikel", icon: "Newspaper" },
@@ -20,7 +29,13 @@ export const navMenus = [
     label: "Layanan", 
     href: "#", 
     icon: "ClipboardList",
-    sub: ["Maklumat Layanan", "Standar Layanan"]
+    sub: [
+      // Jika ini ke halaman internal:
+      { label: "Maklumat Layanan", href: "/maklumat" },
+      { label: "Standar Layanan", href: "/maklumat" },
+      // Jika ingin ke web eksternal (Contoh):
+      { label: "Portal Solo", href: "https://surakarta.go.id", isExternal: true }
+    ]
   },
 ];
 

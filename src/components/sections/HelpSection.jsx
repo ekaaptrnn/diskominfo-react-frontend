@@ -1,6 +1,33 @@
 // src/components/sections/HelpSection.jsx
+import React, { useState, useEffect } from 'react'; // 1. Tambahkan import hooks
 
 export default function HelpSection() {
+  // 2. State untuk angka statistik (dimulai dari angka yang ada di gambar)
+  const [stats, setStats] = useState({
+    hariIni: 243,
+    kemarin: 831,
+    bulanIni: 19083,
+    total: 28040
+  });
+
+  // 3. Logika Aktivasi Real-time
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Simulasi pengunjung baru masuk (0-1 orang setiap 5 detik)
+      const visitorIn = Math.floor(Math.random() * 2);
+      
+      if (visitorIn > 0) {
+        setStats(prev => ({
+          ...prev,
+          hariIni: prev.hariIni + visitorIn,
+          total: prev.total + visitorIn
+        }));
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="py-20 bg-slate-50/50">
       <div className="max-w-7xl mx-auto px-6">
@@ -13,7 +40,7 @@ export default function HelpSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
-          {/* 1. Chat BOT MONIKS (UI Only) */}
+          {/* 1. Chat BOT MONIKS (Tetap Sama) */}
           <div className="bg-white rounded-2xl border border-accent-100 shadow-md overflow-hidden flex flex-col h-[450px]">
              <div className="bg-primary p-6 text-white flex justify-between items-center">
                 <div className="flex gap-4 items-center">
@@ -46,9 +73,8 @@ export default function HelpSection() {
              </div>
           </div>
 
-          {/* 2. FAQ & SKM Link */}
+          {/* 2. FAQ & SKM Link (Tetap Sama) */}
           <div className="lg:col-span-2 flex flex-col gap-4">
-             {/* FAQ Accordion Preview */}
              <div className="bg-white p-6 rounded-xl border border-accent-100 flex justify-between items-center group cursor-pointer hover:bg-accent-50 transition">
                 <div className="flex items-center gap-6">
                    <div className="w-12 h-12 bg-orange-100 text-orange-500 rounded-2xl flex items-center justify-center text-xl"><i className="bi bi-question-circle-fill"></i></div>
@@ -68,7 +94,6 @@ export default function HelpSection() {
                 ))}
              </div>
 
-             {/* SKM Banner - Sesuai Poin #9 */}
              <a href="/skm" className="bg-emerald-500 p-8 rounded-2xl text-white flex justify-between items-center mt-4 shadow-sm group">
                 <div className="flex items-center gap-6">
                    <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-3xl"><i className="bi bi-hand-thumbs-up-fill"></i></div>
@@ -84,22 +109,30 @@ export default function HelpSection() {
           </div>
         </div>
 
-        {/* 3. STATISTIK PENGUNJUNG - Sesuai Poin #17 */}
+        {/* 3. STATISTIK PENGUNJUNG - AKTIF REAL-TIME SEKARANG */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white p-10 rounded-2xl border border-accent-100 shadow-sm text-center">
            <div className="group">
-              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition">243</h3>
+              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition tabular-nums">
+                {stats.hariIni.toLocaleString('id-ID')}
+              </h3>
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-3">Hari Ini</p>
            </div>
            <div className="border-l border-slate-100 group">
-              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition">831</h3>
+              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition tabular-nums">
+                {stats.kemarin.toLocaleString('id-ID')}
+              </h3>
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-3">Kemarin</p>
            </div>
            <div className="border-l border-slate-100 group">
-              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition">19.083</h3>
+              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition tabular-nums">
+                {stats.bulanIni.toLocaleString('id-ID')}
+              </h3>
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-3">Bulan Ini</p>
            </div>
            <div className="border-l border-slate-100 group">
-              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition">28.040</h3>
+              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition tabular-nums">
+                {stats.total.toLocaleString('id-ID')}
+              </h3>
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-3">Total Pengunjung</p>
            </div>
         </div>

@@ -1,60 +1,60 @@
 @import "tailwindcss";
 
-@theme {
-  /* Font Utama */
-  --font-sans: "Plus Jakarta Sans", sans-serif;
+@layer components {
+  .form-input-skm {
+    @apply w-full p-3 rounded-xl border-2 border-slate-100 bg-slate-50 focus:bg-white focus:border-accent focus:ring-0 outline-none transition-all font-medium text-slate-700;
+  }
+}
 
-  /* Palette Warna Utama (Sesuai kode Anda) */
-  --color-primary: #1e4b8f;
-  --color-accent: #0ea5e9;
-  
-  /* Alias untuk Dark Mode */
-  --color-bg-page: var(--bg-page);
-  --color-text-main: var(--text-main);
-  --color-card: var(--card-bg);
+@theme {
+  /* Mengunci font tunggal: Inter — netral, umum dipakai situs resmi pemerintah */
+  --font-sans: "Inter", sans-serif;
+
+  /*
+    Warna di bawah ini nilai DEFAULT saja (dipakai sebelum data Theme Setting
+    dari backend selesai di-fetch, dan sebagai fallback kalau API gagal).
+    Setelah halaman dimuat, ThemeProvider (src/context/ThemeContext.jsx) akan
+    menimpa nilai --color-primary-* / --color-accent-* ini secara realtime
+    berdasarkan warna yang diatur admin di dashboard, lengkap dengan gradasi
+    terang-gelapnya supaya tidak terlihat kaku/flat di berbagai elemen UI.
+  */
+  --color-primary-50: #e9eef6;
+  --color-primary-100: #c7d4e8;
+  --color-primary-200: #93aed3;
+  --color-primary-300: #5f87bd;
+  --color-primary-400: #35619f;
+  --color-primary-500: #163c74;
+  --color-primary-600: #123267;
+  --color-primary-700: #0e2954;
+  --color-primary-800: #0a1f42;
+  --color-primary-900: #071530;
+  --color-primary: #163c74;
+
+  --color-accent-50: #fdf6e7;
+  --color-accent-100: #f8e7bf;
+  --color-accent-200: #f0cd7e;
+  --color-accent-300: #e6b34a;
+  --color-accent-400: #d69f2f;
+  --color-accent-500: #b8860b;
+  --color-accent-600: #9c7009;
+  --color-accent-700: #7d5a08;
+  --color-accent-800: #5e4306;
+  --color-accent-900: #402e04;
+  --color-accent: #b8860b;
 
   --font-size-hero: clamp(2rem, 1rem + 5vw, 4.5rem);
-}
-
-/* Konfigurasi Variabel Warna */
-:root {
-  --bg-page: #f4f9ff;
-  --text-main: #0d1a36;
-  --card-bg: #ffffff;
-  --border-subtle: #e2e8f0;
-}
-
-/* Override Warna saat Mode Gelap (.dark) aktif */
-.dark {
-  --bg-page: #020617; /* Navy super gelap */
-  --text-main: #f1f5f9; /* Putih keabuan */
-  --card-bg: #0f172a; /* Slate 900 */
-  --border-subtle: #1e293b;
 }
 
 @layer base {
   body {
     font-family: var(--font-sans);
-    background-color: var(--bg-page);
-    color: var(--text-main);
-    @apply antialiased transition-colors duration-300;
+    letter-spacing: -0.01em; /* Meningkatkan kemewahan visual */
+    @apply antialiased bg-slate-50 text-slate-900;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.025em;
-    @apply font-extrabold transition-colors duration-300;
-  }
-}
-
-@layer components {
-  .form-input-skm {
-    @apply w-full p-3 rounded-xl border-2 border-slate-100 bg-slate-50 focus:bg-white focus:border-accent focus:ring-0 outline-none transition-all font-medium text-slate-700;
-  }
-  
-  /* Card yang mendukung dark mode otomatis */
-  .card-airy {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-subtle);
-    @apply rounded-[2.5rem] p-8 shadow-sm transition-all duration-300;
+    font-family: var(--font-sans);
+    letter-spacing: -0.025em; /* Lebih rapat untuk heading agar tegas */
+    @apply font-extrabold;
   }
 }

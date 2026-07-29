@@ -5,8 +5,8 @@ export default function MediaSection() {
         
         {/* Kolom Dokumen (2/3) */}
         <div className="lg:col-span-2">
-          <h2 className="text-3xl font-black text-slate-800 mb-8 tracking-tighter">Dokumen & Data Publik</h2>
-          <div className="bg-white rounded-[2.5rem] p-4 border border-slate-200 shadow-sm">
+          <h2 className="text-3xl font-bold text-slate-800 mb-8 tracking-tight">Dokumen & Data Publik</h2>
+          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
             <div className="flex gap-4 p-2 mb-4 border-b border-slate-100">
                <button className="text-xs font-bold text-primary border-b-2 border-primary pb-2 px-2">Rilis Data</button>
                <button className="text-xs font-bold text-slate-400 pb-2 px-2">LKJIP</button>
@@ -31,14 +31,14 @@ export default function MediaSection() {
 
         {/* Kolom Media/Podcast (1/3) */}
         <div>
-          <h2 className="text-3xl font-black text-slate-800 mb-8 tracking-tighter">KOMINPOD</h2>
-          <div className="bg-primary rounded-[2.5rem] p-8 text-white shadow-xl shadow-primary/20 relative overflow-hidden">
+          <h2 className="text-3xl font-bold text-slate-800 mb-8 tracking-tight">KOMINPOD</h2>
+          <div className="bg-primary rounded-2xl p-8 text-white shadow-xl shadow-primary/20 relative overflow-hidden">
              <i className="bi bi-mic-fill absolute -right-4 -bottom-4 text-9xl opacity-10 rotate-12"></i>
-             <h4 className="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">Podcast Terbaru</h4>
+             <h4 className="text-[10px] font-bold uppercase tracking-widest opacity-60 mb-2">Podcast Terbaru</h4>
              <p className="font-bold text-lg leading-tight mb-8">Ep. 25 — Masa Depan AI di Pemerintahan Solo</p>
              <div className="space-y-4">
                 {[1, 2].map((_, i) => (
-                  <div key={i} className="flex items-center gap-4 bg-white/10 p-3 rounded-2xl border border-white/10 backdrop-blur-sm">
+                  <div key={i} className="flex items-center gap-4 bg-primary-700 p-3 rounded-2xl border border-white/10">
                     <div className="w-8 h-8 rounded-full bg-white text-primary flex items-center justify-center text-xs"><i className="bi bi-play-fill"></i></div>
                     <span className="text-[10px] font-bold opacity-80">Edisi {24-i} — Teknologi Inklusif</span>
                   </div>

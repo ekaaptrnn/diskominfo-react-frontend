@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
-import { applyColorShades } from "../utils/colorUtils";
+import { applyColorShades } from "../utils/ColorUtils";
 
 const ThemeContext = createContext({ primary: "#1e4b8f", accent: "#0ea5e9", loaded: false });
 

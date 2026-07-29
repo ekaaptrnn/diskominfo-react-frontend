@@ -40,7 +40,7 @@ export default function Hero() {
           <img src={banners[current].bg} className="w-full h-full object-cover" alt="Banner" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/40 to-transparent flex items-center px-6 md:px-20">
             <div className="max-w-3xl text-white">
-              <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-none">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-none">
                 {banners[current].title}
               </h1>
               <p className="text-sm md:text-lg font-bold opacity-80 max-w-xl leading-relaxed">
@@ -54,7 +54,7 @@ export default function Hero() {
       {/* Social Media Sidebar (Left) */}
       <div className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-20">
         {['instagram', 'facebook', 'youtube'].map((icon) => (
-          <button key={icon} className="w-10 h-10 rounded-full border border-white/30 bg-white/10 backdrop-blur-md flex items-center justify-center hover:bg-white hover:text-primary transition">
+          <button key={icon} className="w-10 h-10 rounded-full border border-white/40 bg-primary-700 flex items-center justify-center hover:bg-white hover:text-primary transition-colors">
             <i className={`bi bi-${icon}`}></i>
           </button>
         ))}

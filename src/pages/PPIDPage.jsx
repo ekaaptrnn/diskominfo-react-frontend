@@ -116,8 +116,11 @@ export default function PPIDPage() {
               loading ? (
                 <div className="py-20 text-center text-slate-400 font-bold">Memuat dokumen...</div>
               ) : filteredDokumen.length === 0 ? (
-                <div className="py-20 text-center text-slate-300 font-black uppercase tracking-widest italic">
-                  Belum ada dokumen untuk kategori ini.
+                <div className="py-20 flex flex-col items-center gap-3 text-center">
+                  <FileText size={32} className="text-slate-300" />
+                  <p className="text-sm font-semibold text-slate-500">
+                    Belum ada dokumen untuk kategori ini.
+                  </p>
                 </div>
               ) : (
               <div className="overflow-x-auto">
@@ -188,8 +191,10 @@ export default function PPIDPage() {
                 </form>
               </div>
             ) : (
-              <div className="py-20 text-center">
-                <p className="text-slate-300 font-black uppercase tracking-widest italic">Content for {activeTab} will be integrated from Database...</p>
+            <div className="py-20 flex flex-col items-center gap-3 text-center">
+              <Scale size={32} className="text-slate-300" />
+              <p className="text-sm font-semibold text-slate-500"> Konten "{activeTab}" sedang disiapkan dan akan segera tersedia.
+                </p>
               </div>
             )}
           </section>

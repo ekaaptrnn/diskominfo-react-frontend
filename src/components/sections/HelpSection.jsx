@@ -8,13 +8,13 @@ export default function HelpSection() {
           <div className="inline-flex items-center gap-2 bg-white text-accent-700 px-4 py-1.5 rounded-full mb-4 font-bold text-[10px] uppercase border border-accent-100 shadow-sm">
              <span className="w-1.5 h-1.5 bg-accent-600 rounded-full animate-bounce"></span> Pusat Bantuan
           </div>
-          <h2 className="text-4xl font-black text-slate-800 mb-2 tracking-tighter">Pusat Bantuan & Interaksi</h2>
+          <h2 className="text-4xl font-bold text-slate-800 mb-2 tracking-tight">Pusat Bantuan & Interaksi</h2>
           <p className="text-slate-400 font-medium">Temukan jawaban atau hubungi asisten virtual kami</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
           {/* 1. Chat BOT MONIKS (UI Only) */}
-          <div className="bg-white rounded-[2.5rem] border border-accent-100 shadow-2xl overflow-hidden flex flex-col h-[450px]">
+          <div className="bg-white rounded-2xl border border-accent-100 shadow-md overflow-hidden flex flex-col h-[450px]">
              <div className="bg-primary p-6 text-white flex justify-between items-center">
                 <div className="flex gap-4 items-center">
                    <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl shadow-inner"><i className="bi bi-robot"></i></div>
@@ -49,11 +49,11 @@ export default function HelpSection() {
           {/* 2. FAQ & SKM Link */}
           <div className="lg:col-span-2 flex flex-col gap-4">
              {/* FAQ Accordion Preview */}
-             <div className="bg-white p-6 rounded-[2rem] border border-accent-100 flex justify-between items-center group cursor-pointer hover:bg-accent-50 transition">
+             <div className="bg-white p-6 rounded-xl border border-accent-100 flex justify-between items-center group cursor-pointer hover:bg-accent-50 transition">
                 <div className="flex items-center gap-6">
                    <div className="w-12 h-12 bg-orange-100 text-orange-500 rounded-2xl flex items-center justify-center text-xl"><i className="bi bi-question-circle-fill"></i></div>
                    <div>
-                      <h4 className="font-black text-slate-800 text-sm uppercase tracking-tight">FAQ</h4>
+                      <h4 className="font-bold text-slate-800 text-sm uppercase tracking-tight">FAQ</h4>
                       <p className="text-[10px] text-slate-400 font-bold">Pertanyaan yang sering diajukan</p>
                    </div>
                 </div>
@@ -69,12 +69,11 @@ export default function HelpSection() {
              </div>
 
              {/* SKM Banner - Sesuai Poin #9 */}
-             <a href="/skm" className="bg-emerald-500 p-8 rounded-[2.5rem] text-white flex justify-between items-center mt-4 shadow-xl shadow-emerald-100 group relative overflow-hidden">
-                <i className="bi bi-check2-circle absolute -right-6 -bottom-6 text-[120px] opacity-10 rotate-12"></i>
-                <div className="flex items-center gap-6 relative z-10">
+             <a href="/skm" className="bg-emerald-500 p-8 rounded-2xl text-white flex justify-between items-center mt-4 shadow-sm group">
+                <div className="flex items-center gap-6">
                    <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-3xl"><i className="bi bi-hand-thumbs-up-fill"></i></div>
                    <div>
-                      <h4 className="font-black text-lg tracking-tight leading-none">Survei Kepuasan Masyarakat (SKM)</h4>
+                      <h4 className="font-bold text-lg tracking-tight leading-none">Survei Kepuasan Masyarakat (SKM)</h4>
                       <p className="text-[10px] opacity-80 mt-2 font-bold uppercase tracking-widest">Berikan penilaian terhadap layanan kami</p>
                    </div>
                 </div>
@@ -86,22 +85,22 @@ export default function HelpSection() {
         </div>
 
         {/* 3. STATISTIK PENGUNJUNG - Sesuai Poin #17 */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white p-10 rounded-[3rem] border border-accent-100 shadow-sm text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white p-10 rounded-2xl border border-accent-100 shadow-sm text-center">
            <div className="group">
-              <h3 className="text-4xl font-black text-primary tracking-tighter group-hover:scale-110 transition">243</h3>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-3">Hari Ini</p>
+              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition">243</h3>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-3">Hari Ini</p>
            </div>
            <div className="border-l border-slate-100 group">
-              <h3 className="text-4xl font-black text-primary tracking-tighter group-hover:scale-110 transition">831</h3>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-3">Kemarin</p>
+              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition">831</h3>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-3">Kemarin</p>
            </div>
            <div className="border-l border-slate-100 group">
-              <h3 className="text-4xl font-black text-primary tracking-tighter group-hover:scale-110 transition">19.083</h3>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-3">Bulan Ini</p>
+              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition">19.083</h3>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-3">Bulan Ini</p>
            </div>
            <div className="border-l border-slate-100 group">
-              <h3 className="text-4xl font-black text-primary tracking-tighter group-hover:scale-110 transition">28.040</h3>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-3">Total Pengunjung</p>
+              <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition">28.040</h3>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-3">Total Pengunjung</p>
            </div>
         </div>
       </div>

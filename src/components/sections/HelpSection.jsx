@@ -109,7 +109,7 @@ export default function HelpSection() {
           </div>
         </div>
 
-        {/* 3. STATISTIK PENGUNJUNG - AKTIF REAL-TIME SEKARANG */}
+        {/*REAL-TIME SEKARANG */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white p-10 rounded-2xl border border-accent-100 shadow-sm text-center">
            <div className="group">
               <h3 className="text-4xl font-bold text-primary tracking-tight group-hover:scale-110 transition tabular-nums">

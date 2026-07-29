@@ -47,13 +47,7 @@ export default function PPIDPage() {
       { name: "Informasi Serta Merta", icon: ShieldCheck },
       { name: "Informasi Dikecualikan", icon: Lock },
     ]},
-    { group: "Layanan Informasi", items: [
-      { name: "Profil PPID Pelaksana", icon: Users },
-      { name: "Pemohon Informasi", icon: FileText },
-      { name: "Mekanisme Pemohon", icon: Scale },
-      { name: "Dasar Hukum PPID", icon: Scale },
-      { name: "Penghargaan", icon: Award },
-    ]}
+    
   ];
 
   return (

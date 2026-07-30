@@ -1,19 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MapPin, Info, ExternalLink, Users, ChevronRight } from "lucide-react";
-import { visitorStats } from '../../data';
-import axios from "axios";
-
-<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-  {visitorStats.map((stat, i) => (
-    <div key={i} className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-[2rem] text-center">
-      <p className="text-[10px] font-black text-blue-300 uppercase tracking-[0.2em] mb-2">{stat.label}</p>
-      <h4 className="text-2xl font-black text-white tracking-tighter">
-        {/* Simulasi hitung cepat (Odometer effect) */}
-        {stat.value.toLocaleString()}
-      </h4>
-    </div>
-  ))}
-</div>
+import { api } from "../../services/api";
 
 export default function Footer() {
   // State untuk menampung data statistik dari Backend
@@ -24,12 +11,11 @@ export default function Footer() {
     { label: "Total", value: "..." },
   ]);
 
-  // Logic Fetching dari Backend Laravel
+  // Logic Fetching dari Backend Laravel — pakai instance `api` (baseURL sudah benar)
   useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        // Sesuaikan endpoint ini dengan API Laravel Anda nanti (Blueprint Bab IV)
-        const response = await axios.get("/api/visitor-stats");
+    api
+      .get("/visitor-stats")
+      .then((response) => {
         if (response.data) {
           setVisitorStats([
             { label: "Hari Ini", value: response.data.today },
@@ -38,22 +24,24 @@ export default function Footer() {
             { label: "Total", value: response.data.total },
           ]);
         }
-      } catch (error) {
+      })
+      .catch((error) => {
         console.error("Gagal mengambil data statistik:", error);
         // Tetap biarkan "..." jika gagal agar tidak merusak UI
-      }
-    };
-
-    fetchStats();
+      });
   }, []);
 
   return (
     <footer
-      className="border-t border-white/[0.1] mt-10 font-sans"
+      className="relative border-t border-white/[0.1] mt-10 font-sans overflow-hidden"
       style={{ background: "#0d1a36" }}
     >
+      {/* Aksen blur lembut di background, senada dengan gaya kaca di section lain */}
+      <div className="pointer-events-none absolute -top-24 left-1/4 w-96 h-96 rounded-full bg-accent/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 right-1/4 w-96 h-96 rounded-full bg-primary-400/10 blur-3xl" />
+
       {/* 1. TOP BAR: Banner Organisasi Terkait (Statis sesuai Branding) */}
-      <div className="border-b border-white/[0.08] px-6 py-6">
+      <div className="relative border-b border-white/[0.08] px-6 py-6 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center sm:justify-between gap-8 md:gap-12">
           {[
             {
@@ -79,12 +67,10 @@ export default function Footer() {
               <div
                 className={`w-11 h-11 rounded-xl bg-gradient-to-br flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300 ${org.g}`}
               >
-                <span className="text-white font-black text-sm">
-                  {org.initial}
-                </span>
+                <span className="text-white font-black text-sm">{org.initial}</span>
               </div>
               <div>
-                <p className="text-white font-extrabold text-sm leading-tight group-hover:text-accent-400 transition-colors">
+                <p className="text-white font-extrabold text-sm leading-tight group-hover:text-accent-300 transition-colors">
                   {org.name}
                 </p>
                 <p className="text-accent-300/60 text-[10px] font-medium uppercase tracking-tighter mt-0.5">{org.sub}</p>
@@ -95,14 +81,14 @@ export default function Footer() {
       </div>
 
       {/* 2. MAIN FOOTER CONTENT */}
-      <div className="px-6 py-12 max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        
+      <div className="relative px-6 py-12 max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
         {/* Kolom 1: Lokasi */}
         <div>
           <h4 className="text-[#29A8E0] font-black text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
             <MapPin size={14} strokeWidth={3} /> Lokasi
           </h4>
-          <div className="rounded-2xl overflow-hidden border border-white/[0.12] mb-4 shadow-2xl aspect-video relative group">
+          <div className="rounded-2xl overflow-hidden border border-white/[0.12] backdrop-blur-md mb-4 shadow-2xl aspect-video relative group">
             <iframe
               title="Lokasi Diskominfo SP"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.123!2d110.8265!3d-7.5558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a168636a0d0d1%3A0x6b1f2382e2136e05!2sBalaikota%20Surakarta!5e0!3m2!1sen!2sid!4v1700000000000"
@@ -154,7 +140,7 @@ export default function Footer() {
           <h4 className="text-[#29A8E0] font-black text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
             <Users size={14} strokeWidth={3} /> Pengunjung
           </h4>
-          <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
+          <div className="bg-white/[0.06] backdrop-blur-md rounded-2xl p-4 border border-white/10">
             {visitorStats.map((stat) => (
               <div
                 key={stat.label}
@@ -171,7 +157,7 @@ export default function Footer() {
       </div>
 
       {/* 3. BOTTOM BAR */}
-      <div className="border-t border-white/[0.07] px-6 py-6 text-center sm:text-left">
+      <div className="relative border-t border-white/[0.07] px-6 py-6 text-center sm:text-left">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-accent-300/40 text-[10px] font-bold uppercase tracking-[0.15em]">
           <p>© 2026 — Pemerintah Kota Surakarta. Hak cipta dilindungi undang-undang.</p>
           <p className="text-[#29A8E0]/60 uppercase">Dinas Komunikasi Informatika dan Persandian Kota Surakarta</p>

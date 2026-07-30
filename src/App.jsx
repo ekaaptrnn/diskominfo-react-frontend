@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import Navbar from "./components/layout/Navbar"; 
-import Footer from "./components/layout/footer"; 
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/footer";
 
-// --- PAGES PUBLIK ---
+// Pages
 import Home from "./pages/Home";
 import VisiMisi from "./pages/VisiMisi";
 import Tupoksi from "./pages/Tupoksi";
@@ -16,24 +16,16 @@ import PPIDPage from "./pages/PPIDPage";
 import StrukturOrganisasi from "./pages/StrukturOrganisasi";
 import Login from './pages/Login';
 
-// --- PAGES ADMIN ---
-import KelolaLayanan from "./pages/admin/KelolaLayanan";
-import EditSKM from "./pages/admin/EditSKM";
-
 const AppContent = ({ dark, toggleDark }) => {
   const location = useLocation();
-  
-  // Logika: Sembunyikan Navbar & Footer jika di halaman Login ATAU halaman berawalan /admin
-  const hideLayout = location.pathname === '/login' || location.pathname.startsWith('/admin');
+  const isLoginPage = location.pathname === '/login';
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Navbar dikirimi state dark dan fungsi toggle */}
-      {!hideLayout && <Navbar dark={dark} toggleDark={toggleDark} />}
-      
+    <div className="app-background antialiased min-h-screen flex flex-col font-sans transition-colors">
+      {!isLoginPage && <Navbar dark={dark} toggleDark={toggleDark} />}
+
       <main className="flex-grow">
         <Routes>
-          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/visi-misi" element={<VisiMisi />} />
           <Route path="/tupoksi" element={<Tupoksi />} />
@@ -45,37 +37,27 @@ const AppContent = ({ dark, toggleDark }) => {
           <Route path="/ppid" element={<PPIDPage />} />
           <Route path="/struktur" element={<StrukturOrganisasi />} />
           <Route path="/login" element={<Login />} />
-
-          {/* Admin Routes */}
-          <Route path="/admin/layanan" element={<KelolaLayanan />} />
-          <Route path="/admin/skm" element={<EditSKM />} />
-          <Route path="/admin/dashboard" element={<KelolaLayanan />} />
         </Routes>
       </main>
 
-      {!hideLayout && <Footer />}
+      {!isLoginPage && <Footer />}
     </div>
   );
 };
 
-export default function App() {
-  // 1. Ambil tema awal dari localStorage
+function App() {
   const [dark, setDark] = useState(() => {
-    return localStorage.getItem("theme") === "dark";
+    const saved = localStorage.getItem("theme");
+    if (saved) return saved === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
-  // 2. Gunakan useEffect untuk update class "dark" di tag <html>
   useEffect(() => {
-    if (dark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem("theme", "light");
-    }
+    document.documentElement.classList.toggle("dark", dark);
+    localStorage.setItem("theme", dark ? "dark" : "light");
   }, [dark]);
 
-  const toggleDark = () => setDark(!dark);
+  const toggleDark = () => setDark((prev) => !prev);
 
   return (
     <Router>
@@ -83,3 +65,5 @@ export default function App() {
     </Router>
   );
 }
+
+export default App;

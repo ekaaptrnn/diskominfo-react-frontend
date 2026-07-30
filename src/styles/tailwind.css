@@ -1,23 +1,39 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer components {
   .form-input-skm {
     @apply w-full p-3 rounded-xl border-2 border-slate-100 bg-slate-50 focus:bg-white focus:border-accent focus:ring-0 outline-none transition-all font-medium text-slate-700;
   }
+
+  /* Background aplikasi: mesh gradient primary + accent, kesan modern/digital.
+     Dipasang sekali di root layout (App.jsx). */
+  .app-background {
+    background-color: #f0f5fb;
+    background-image:
+      radial-gradient(circle at 8% 8%, rgba(184, 134, 11, 0.16) 0%, transparent 45%),
+      radial-gradient(circle at 92% 15%, rgba(22, 60, 116, 0.14) 0%, transparent 40%),
+      radial-gradient(circle at 15% 90%, rgba(22, 60, 116, 0.12) 0%, transparent 45%),
+      radial-gradient(circle at 95% 95%, rgba(184, 134, 11, 0.10) 0%, transparent 40%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .dark .app-background {
+    background-color: #071530;
+    background-image:
+      radial-gradient(circle at 8% 8%, rgba(230, 179, 74, 0.14) 0%, transparent 45%),
+      radial-gradient(circle at 92% 15%, rgba(95, 135, 189, 0.16) 0%, transparent 40%),
+      radial-gradient(circle at 15% 90%, rgba(95, 135, 189, 0.12) 0%, transparent 45%),
+      radial-gradient(circle at 95% 95%, rgba(230, 179, 74, 0.10) 0%, transparent 40%);
+  }
 }
 
 @theme {
-  /* Mengunci font tunggal: Inter — netral, umum dipakai situs resmi pemerintah */
   --font-sans: "Inter", sans-serif;
 
-  /*
-    Warna di bawah ini nilai DEFAULT saja (dipakai sebelum data Theme Setting
-    dari backend selesai di-fetch, dan sebagai fallback kalau API gagal).
-    Setelah halaman dimuat, ThemeProvider (src/context/ThemeContext.jsx) akan
-    menimpa nilai --color-primary-* / --color-accent-* ini secara realtime
-    berdasarkan warna yang diatur admin di dashboard, lengkap dengan gradasi
-    terang-gelapnya supaya tidak terlihat kaku/flat di berbagai elemen UI.
-  */
   --color-primary-50: #e9eef6;
   --color-primary-100: #c7d4e8;
   --color-primary-200: #93aed3;
@@ -49,7 +65,7 @@
   body {
     font-family: var(--font-sans);
     letter-spacing: -0.01em; /* Meningkatkan kemewahan visual */
-    @apply antialiased bg-slate-50 text-slate-900;
+    @apply antialiased text-slate-900 dark:text-white;
   }
 
   h1, h2, h3, h4, h5, h6 {

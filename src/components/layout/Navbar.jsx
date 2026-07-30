@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { Search, Menu, X, ChevronDown, Bell, Moon, Sun, Home, FileText, Info, Star, Newspaper, ClipboardList, Clock } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Search, Menu, X, ChevronDown, Moon, Sun, Home, FileText, Info, Star, Newspaper, ClipboardList, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useDateTime } from "@/hooks/UseDateTime";
 import { navMenus } from "../../data";
@@ -12,9 +12,19 @@ const iconMap = {
 export default function Navbar({ dark, toggleDark }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [drop, setDrop] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
   const closeTimer = useRef(null);
 
   const currentDateTime = useDateTime();
+
+  // Deteksi scroll: begitu geser turun lebih dari 20px, navbar berubah
+  // dari nyatu di paling atas jadi "melayang" terpisah dari tepi layar.
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    handleScroll(); // cek posisi awal (misal reload di tengah scroll)
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const openDropdown = (label) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -26,8 +36,13 @@ export default function Navbar({ dark, toggleDark }) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 font-sans">
-      {/* 1. TOP UTILITY BAR */}
-      <div className="hidden md:block border-b border-white/10" style={{ background: "#1c2030" }}>
+      {/* 1. TOP UTILITY BAR — otomatis collapse (tinggi jadi 0) begitu scroll turun */}
+      <div
+        className={`hidden md:block border-b border-white/10 overflow-hidden transition-all duration-300 ease-in-out ${
+          scrolled ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
+        }`}
+        style={{ background: "#1c2030" }}
+      >
         <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
           <span className="flex items-center gap-2 text-slate-300 text-[11px] font-semibold uppercase tracking-wider">
             <Clock size={12} className="text-slate-400" />
@@ -51,17 +66,34 @@ export default function Navbar({ dark, toggleDark }) {
         </div>
       </div>
 
-      {/* 2. MAIN NAV — solid, tanpa blur/transparansi */}
-      <div className="px-4 pt-3 pb-2">
-        <div className="max-w-7xl mx-auto rounded-xl bg-primary px-6 py-3 flex items-center justify-between shadow-md">
+      {/* 2. MAIN NAV — kaca (glassmorphism). Nyatu penuh di paling atas,
+          begitu discroll jadi "melayang" dengan jarak & sudut membulat. */}
+      <div
+        className={`transition-all duration-300 ease-in-out ${
+          scrolled ? "px-4 pt-2 pb-1.5" : "px-0 pt-0 pb-0"
+        }`}
+      >
+        <div
+          className={`mx-auto flex items-center justify-between backdrop-blur-xl border-white/20 transition-all duration-300 ease-in-out ${
+            scrolled
+              ? "max-w-7xl rounded-2xl border px-5 py-2.5"
+              : "max-w-full rounded-none border-x-0 border-t-0 border-b px-6 py-3.5"
+          }`}
+          style={{
+            background: "rgba(30,79,146,0.90)",
+            boxShadow: scrolled
+              ? "0 4px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.12)"
+              : "none",
+          }}
+        >
           {/* Logo Section */}
           <Link to="/" className="flex items-center gap-4 group">
-            <div className="bg-white p-1.5 rounded-lg">
+            <div className="bg-white p-1.5 rounded-xl">
               <img src="/logo-solo.png" alt="Logo" className="h-8 w-auto object-contain" />
             </div>
             <div className="leading-none border-l border-white/25 pl-4">
               <h1 className="font-bold text-sm text-white tracking-tight uppercase">Diskominfo SP</h1>
-              <p className="text-[8px] font-semibold text-primary-200 uppercase tracking-[0.2em] mt-0.5">Kota Surakarta</p>
+              <p className="text-[8px] font-semibold text-accent-200 uppercase tracking-[0.2em] mt-0.5">Kota Surakarta</p>
             </div>
           </Link>
 
@@ -78,24 +110,25 @@ export default function Navbar({ dark, toggleDark }) {
                 >
                   <Link
                     to={item.href.startsWith('#') ? '#' : item.href}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-[11px] font-bold uppercase tracking-tight text-white/85 hover:text-white hover:bg-white/10 transition-colors duration-200"
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-[11px] font-bold uppercase tracking-tight text-white/85 hover:text-white hover:bg-white/15 transition-colors duration-200"
                   >
-                    {Icon && <Icon size={14} className="text-primary-200" />}
+                    {Icon && <Icon size={14} className="text-accent-300" />}
                     {item.label}
                     {item.sub && (
                       <ChevronDown
                         size={10}
-                        className={`text-primary-200 transition-transform duration-200 ${drop === item.label ? "rotate-180" : ""}`}
+                        className={`text-accent-300/80 transition-transform duration-200 ${drop === item.label ? "rotate-180" : ""}`}
                       />
                     )}
                   </Link>
 
-                  {/* Dropdown Menu — solid putih, tanpa blur */}
+                  {/* Dropdown Menu — kaca putih */}
                   {item.sub && drop === item.label && (
                     <div
                       onMouseEnter={() => clearTimeout(closeTimer.current)}
                       onMouseLeave={closeDropdownDelayed}
-                      className="absolute top-full left-0 mt-2 min-w-64 rounded-xl border border-slate-100 bg-white shadow-lg py-2 z-50"
+                      className="absolute top-full left-0 mt-2 min-w-64 rounded-2xl border border-primary/15 shadow-[0_8px_32px_rgba(0,0,0,0.18)] py-2 z-50 backdrop-blur-xl"
+                      style={{ background: "rgba(255,255,255,0.97)" }}
                     >
                       {item.sub.map((s) => {
                         const routeMap = {
@@ -110,14 +143,13 @@ export default function Navbar({ dark, toggleDark }) {
                           "Informasi Serta Merta": "/ppid?tab=Informasi+Serta+Merta",
                           "Informasi Dikecualikan": "/ppid?tab=Informasi+Dikecualikan",
                         };
-                        // Dukung 2 kemungkinan bentuk data: string biasa, atau { label, href }
                         const label = typeof s === "string" ? s : s.label;
                         const to = typeof s === "string" ? (routeMap[s] || "/") : (s.href || "/");
                         return (
                           <Link
                             key={label}
                             to={to}
-                            className="block px-5 py-3 text-[12px] text-primary font-semibold hover:bg-slate-50 transition-colors border-b border-slate-50 last:border-0"
+                            className="block px-5 py-3 text-[12px] text-primary font-semibold hover:bg-accent-50 transition-colors border-b border-slate-50 last:border-0"
                           >
                             {label}
                           </Link>
@@ -130,33 +162,33 @@ export default function Navbar({ dark, toggleDark }) {
             })}
           </nav>
 
-          {/* Action Buttons — solid, tanpa efek kaca */}
+          {/* Action Buttons — kaca */}
           <div className="flex items-center gap-2">
-            <button className="w-9 h-9 rounded-lg bg-primary-600 flex items-center justify-center text-white hover:bg-primary-700 transition-colors">
-              <Search size={16} />
-            </button>
-            <button className="w-9 h-9 rounded-lg bg-primary-600 flex items-center justify-center text-white hover:bg-primary-700 transition-colors relative">
-              <Bell size={16} />
-              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-rose-500 border-2 border-primary" />
+            <button className="w-8 h-8 rounded-xl bg-white/12 border border-white/20 flex items-center justify-center text-white hover:bg-white/22 transition-all">
+              <Search size={15} />
             </button>
             <button
               onClick={toggleDark}
-              className="w-9 h-9 rounded-lg bg-primary-600 flex items-center justify-center text-white hover:bg-primary-700 transition-colors"
+              className="w-8 h-8 rounded-xl bg-white/12 border border-white/20 flex items-center justify-center text-white hover:bg-white/22 transition-all"
+              title={dark ? "Mode Terang" : "Mode Gelap"}
             >
-              {dark ? <Sun size={16} /> : <Moon size={16} />}
+              {dark ? <Sun size={15} /> : <Moon size={15} />}
             </button>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="lg:hidden w-9 h-9 rounded-lg bg-primary-600 flex items-center justify-center text-white"
+              className="lg:hidden w-8 h-8 rounded-xl bg-white/12 border border-white/20 flex items-center justify-center text-white"
             >
-              {menuOpen ? <X size={18} /> : <Menu size={18} />}
+              {menuOpen ? <X size={16} /> : <Menu size={16} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu — solid putih */}
+        {/* Mobile Menu — kaca putih */}
         {menuOpen && (
-          <div className="lg:hidden max-w-7xl mx-auto mt-2 rounded-xl border border-slate-100 bg-white shadow-lg p-4">
+          <div
+            className="lg:hidden max-w-7xl mx-auto mt-2 rounded-2xl border border-primary/15 shadow-[0_8px_32px_rgba(0,0,0,0.15)] p-3 backdrop-blur-xl"
+            style={{ background: "rgba(255,255,255,0.97)" }}
+          >
             {navMenus.map((item) => {
               const Icon = iconMap[item.icon];
               return (
@@ -164,9 +196,9 @@ export default function Navbar({ dark, toggleDark }) {
                   key={item.label}
                   to={item.href.startsWith('#') ? '#' : item.href}
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-4 px-5 py-3.5 rounded-lg text-xs font-bold uppercase text-primary hover:bg-slate-50 transition-colors"
+                  className="flex items-center gap-4 px-5 py-3.5 rounded-xl text-xs font-bold uppercase text-primary hover:bg-accent-50 transition-colors"
                 >
-                  {Icon && <Icon size={16} className="text-primary-400" />}
+                  {Icon && <Icon size={16} className="text-accent-600" />}
                   {item.label}
                 </Link>
               );

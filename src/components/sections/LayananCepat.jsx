@@ -98,8 +98,8 @@ export default function LayananCepat() {
               <div className={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 ${item.color}`}></div>
 
               {/* Box Logo: putih/glass supaya logo PNG tampil natural, ring tipis pakai warna asli layanan */}
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-white dark:bg-white/90 ring-2 ring-offset-2 ring-offset-white/80 dark:ring-offset-white/[0.07] mb-6 shadow-md group-hover:rotate-6 group-hover:scale-110 transition-all duration-500`}>
-                <img src={item.icon} alt={item.name} className="w-9 h-9 object-contain" />
+              <div className={`w-16 h-16 rounded-2xl overflow-hidden flex items-center justify-center bg-white dark:bg-white/90 ring-2 ring-offset-2 ring-offset-white/80 dark:ring-offset-white/[0.07] mb-6 shadow-md group-hover:rotate-6 group-hover:scale-110 transition-all duration-500`}>
+                <img src={item.icon} alt={item.name} className="w-full h-full object-cover" />
               </div>
               
               <h4 className="font-black text-primary-900 dark:text-white text-xs md:text-sm uppercase tracking-tight leading-tight flex items-center gap-2">

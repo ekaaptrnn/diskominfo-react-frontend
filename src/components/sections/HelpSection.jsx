@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-// import { api } from '../../services/api'; // Hapus atau comment baris ini jika api tidak digunakan lagi di file ini
 
 const knowledgeBase = [
   {
@@ -69,8 +68,6 @@ export default function HelpSection() {
     if (e.key === 'Enter') handleSend();
   };
 
-  // State statCards dan useEffect untuk /visitor-stats sudah dihapus dari sini
-
   return (
     <section className="py-14 bg-slate-50/50">
       <div className="max-w-7xl mx-auto px-6">
@@ -82,7 +79,6 @@ export default function HelpSection() {
           <p className="text-slate-400 font-medium text-sm">Temukan jawaban atau hubungi asisten virtual kami</p>
         </div>
 
-        {/* Ubah mb-12 menjadi mb-0 atau hapus margin bottom karena bagian bawahnya (statistik) sudah hilang */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* 1. Chat BOT MONIKS */}
           <div className="bg-white rounded-2xl border border-accent-100 shadow-md overflow-hidden flex flex-col h-[450px]">
@@ -136,7 +132,8 @@ export default function HelpSection() {
           </div>
 
           {/* 2. FAQ & SKM Link */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
+          {/* PERUBAHAN: Menambahkan h-full pada div pembungkus kanan agar tingginya maksimal */}
+          <div className="lg:col-span-2 flex flex-col gap-4 h-full">
              <div className="bg-white p-5 rounded-xl border border-accent-100 flex justify-between items-center group cursor-pointer hover:bg-accent-50 transition">
                 <div className="flex items-center gap-5">
                    <div className="w-11 h-11 bg-orange-100 text-orange-500 rounded-2xl flex items-center justify-center text-lg"><i className="bi bi-question-circle-fill"></i></div>
@@ -156,7 +153,8 @@ export default function HelpSection() {
                 ))}
              </div>
 
-             <a href="/skm" className="bg-emerald-500 p-6 rounded-2xl text-white flex justify-between items-center mt-2 shadow-sm group">
+             {/* PERUBAHAN: Menambahkan mt-auto agar banner SKM didorong ke bagian paling bawah kolom */}
+             <a href="/skm" className="bg-emerald-500 p-6 rounded-2xl text-white flex justify-between items-center mt-auto shadow-sm group">
                 <div className="flex items-center gap-5">
                    <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl"><i className="bi bi-hand-thumbs-up-fill"></i></div>
                    <div>
@@ -170,8 +168,6 @@ export default function HelpSection() {
              </a>
           </div>
         </div>
-
-        {/* Bagian Statistik Pengunjung (div grid statCards) sudah dihapus dari sini */}
       </div>
     </section>
   );

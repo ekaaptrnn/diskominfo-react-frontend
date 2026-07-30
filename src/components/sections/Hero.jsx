@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import heroImage1 from "../../assets/hero/cover-diskominfo.jpg";
+import heroImage2 from "../../assets/hero/prestasi-solo1.jpg";
 
 const banners = [
   {
     id: 1,
     title: "DISKOMINFO SP KOTA SURAKARTA",
     address: "Gedung Bale Upakari Lantai 3, Jl. Jenderal Sudirman No.2 Kampung Baru, Kec. Pasar Kliwon, Kota Surakarta, Jawa Tengah 57133",
-    bg: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2000",
+    bg: heroImage1,
   },
   {
     id: 2,
-    title: "TRANSFORMASI DIGITAL SOLO",
+    title: "Prestasi Kota Surakarta",
     address: "Mewujudkan Solo Smart City yang inklusif dan transparan untuk seluruh warga.",
-    bg: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000",
+    bg: heroImage2,
   }
 ];
 

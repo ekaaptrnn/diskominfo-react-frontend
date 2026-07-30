@@ -3,6 +3,7 @@ import { Search, Menu, X, ChevronDown, Moon, Sun, Home, FileText, Info, Star, Ne
 import { Link } from "react-router-dom";
 import { useDateTime } from "@/hooks/UseDateTime";
 import { navMenus } from "../../data";
+import logoNavbar from "../../assets/diskomifo-pemkot.png";
 
 // Mapping icon string ke komponen Lucide
 const iconMap = {
@@ -34,7 +35,7 @@ export default function Navbar({ dark, toggleDark }) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 font-sans">
-      {/* 1. TOP UTILITY BAR — otomatis collapse (tinggi jadi 0) begitu scroll turun */}
+      {/* 1. TOP UTILITY BAR*/}
       <div
         className={`hidden md:block border-b border-white/10 overflow-hidden transition-all duration-300 ease-in-out ${
           scrolled ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
@@ -64,39 +65,67 @@ export default function Navbar({ dark, toggleDark }) {
         </div>
       </div>
 
-      {/* 2. MAIN NAV — kaca (glassmorphism). Nyatu penuh di paling atas,
-          begitu discroll jadi "melayang" dengan jarak & sudut membulat. */}
+      {/* 2. MAIN NAV*/}
       <div
         className={`transition-all duration-300 ease-in-out ${
           scrolled ? "px-4 pt-2 pb-1.5" : "px-0 pt-0 pb-0"
         }`}
       >
         <div
-          className={`mx-auto flex items-center justify-between backdrop-blur-xl border-white/20 transition-all duration-300 ease-in-out ${
+          className={`mx-auto flex items-center justify-between backdrop-blur-xl border-white/20 transition-all duration-300 ease-in-out relative ${
             scrolled
               ? "max-w-7xl rounded-2xl border px-5 py-2.5"
               : "max-w-full rounded-none border-x-0 border-t-0 border-b px-6 py-3.5"
           }`}
           style={{
-            background: "rgba(30,79,146,0.90)",
+            background: "linear-gradient(135deg, rgba(21,35,75,0.95) 0%, rgba(30,79,146,0.95) 50%, rgba(41,168,224,0.95) 100%)",
             boxShadow: scrolled
-              ? "0 4px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.12)"
+              ? "0 4px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.2)"
               : "none",
           }}
         >
+          {/* ========================================================
+              ELEMEN BATIK RANDOM (Dibungkus div terpisah dengan overflow-hidden)
+              ======================================================== */}
+          <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-inherit">
+            {/* Ornamen Batik 1 */}
+            <svg className="absolute -top-6 left-10 w-24 h-24 text-white opacity-[0.04] rotate-12" viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50,0 C60,30 80,40 100,50 C80,60 60,70 50,100 C40,70 20,60 0,50 C20,40 40,30 50,0 Z" />
+              <circle cx="50" cy="50" r="10" fill="transparent" stroke="currentColor" strokeWidth="4"/>
+            </svg>
+            {/* Ornamen Batik 2 */}
+            <svg className="absolute top-4 left-1/4 w-12 h-12 text-white opacity-[0.06] -rotate-45" viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50,0 C60,30 80,40 100,50 C80,60 60,70 50,100 C40,70 20,60 0,50 C20,40 40,30 50,0 Z" />
+            </svg>
+            {/* Ornamen Batik 3 */}
+            <svg className="absolute -bottom-10 left-1/2 w-32 h-32 text-white opacity-[0.03] rotate-45" viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50,0 C60,30 80,40 100,50 C80,60 60,70 50,100 C40,70 20,60 0,50 C20,40 40,30 50,0 Z" />
+              <circle cx="50" cy="50" r="12" fill="transparent" stroke="currentColor" strokeWidth="3"/>
+            </svg>
+            {/* Ornamen Batik 4 */}
+            <svg className="absolute top-1 right-1/3 w-16 h-16 text-white opacity-[0.05] rotate-90" viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50,0 C60,30 80,40 100,50 C80,60 60,70 50,100 C40,70 20,60 0,50 C20,40 40,30 50,0 Z" />
+            </svg>
+            {/* Ornamen Batik 5 */}
+            <svg className="absolute -top-4 right-12 w-20 h-20 text-white opacity-[0.04] -rotate-12" viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50,0 C60,30 80,40 100,50 C80,60 60,70 50,100 C40,70 20,60 0,50 C20,40 40,30 50,0 Z" />
+              <circle cx="50" cy="50" r="8" fill="transparent" stroke="currentColor" strokeWidth="5"/>
+            </svg>
+          </div>
+
           {/* Logo Section */}
-          <Link to="/" className="flex items-center gap-4 group">
-            <div className="bg-white p-1.5 rounded-xl">
-              <img src="/logo-solo.png" alt="Logo" className="h-8 w-auto object-contain" />
-            </div>
-            <div className="leading-none border-l border-white/25 pl-4">
-              <h1 className="font-bold text-sm text-white tracking-tight uppercase">Diskominfo SP</h1>
-              <p className="text-[8px] font-semibold text-accent-200 uppercase tracking-[0.2em] mt-0.5">Kota Surakarta</p>
+          <Link to="/" className="flex items-center gap-4 group relative z-10">
+            <div>
+              <img 
+                src={logoNavbar} 
+                alt="Logo Diskominfo" 
+                className="h-10 md:h-11 w-auto object-contain group-hover:scale-105 transition-transform duration-300" 
+              />
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1 relative z-10">
             {navMenus.map((item) => {
               const Icon = iconMap[item.icon];
               return (
@@ -120,7 +149,7 @@ export default function Navbar({ dark, toggleDark }) {
                     )}
                   </Link>
 
-                  {/* Dropdown Menu — kaca putih */}
+                  {/* Dropdown Menu */}
                   {item.sub && drop === item.label && (
                     <div
                       onMouseEnter={() => clearTimeout(closeTimer.current)}
@@ -160,8 +189,8 @@ export default function Navbar({ dark, toggleDark }) {
             })}
           </nav>
 
-          {/* Action Buttons — kaca */}
-          <div className="flex items-center gap-2">
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2 relative z-10">
             <button className="w-8 h-8 rounded-xl bg-white/12 border border-white/20 flex items-center justify-center text-white hover:bg-white/22 transition-all">
               <Search size={15} />
             </button>
@@ -181,7 +210,7 @@ export default function Navbar({ dark, toggleDark }) {
           </div>
         </div>
 
-        {/* Mobile Menu — kaca putih */}
+        {/* Mobile Menu */}
         {menuOpen && (
           <div
             className="lg:hidden max-w-7xl mx-auto mt-2 rounded-2xl border border-primary/15 shadow-[0_8px_32px_rgba(0,0,0,0.15)] p-3 backdrop-blur-xl"

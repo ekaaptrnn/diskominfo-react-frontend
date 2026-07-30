@@ -17,8 +17,6 @@ export default function Navbar({ dark, toggleDark }) {
 
   const currentDateTime = useDateTime();
 
-  // Deteksi scroll: begitu geser turun lebih dari 20px, navbar berubah
-  // dari nyatu di paling atas jadi "melayang" terpisah dari tepi layar.
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     handleScroll(); // cek posisi awal (misal reload di tengah scroll)

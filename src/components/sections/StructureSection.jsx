@@ -27,7 +27,7 @@ export default function StructureSection() {
   }, []);
 
   return (
-    <section className="py-20 bg-white">
+    <section className="">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px]">Kelembagaan</span>

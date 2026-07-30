@@ -1,38 +1,48 @@
 import React from 'react';
 
+// Aset logo layanan
+import iconLaporSP4N from "../../assets/layanan/lapor-sp4n.png";
+import iconLaporGub from "../../assets/layanan/lapor-gub.png";
+import iconUlas from "../../assets/layanan/ulas.png";
+import iconLaporMasWali from "../../assets/layanan/lapor-mas-wali.png";
+import iconKonata from "../../assets/layanan/konata.png";
+import iconSoloData from "../../assets/layanan/solo-data.png";
+import iconPpidPelaksana from "../../assets/layanan/ppid-pelaksana.png";
+import iconFasilitasPublik from "../../assets/layanan/fasilitas-publik.png";
+
 // Data Layanan Terintegrasi
 const services = [
   { 
     name: "LAPOR SP4N", 
     sub: "Aduan Nasional", 
-    icon: "bi-megaphone-fill", 
+    icon: iconLaporSP4N, 
     color: "bg-rose-500",
     url: "https://www.lapor.go.id/" 
   },
   { 
     name: "Lapor Gub", 
     sub: "Aduan Provinsi", 
-    icon: "bi-bank2", 
+    icon: iconLaporGub, 
     color: "bg-orange-500",
     url: "https://laporgub.jatengprov.go.id/" 
   },
   { 
     name: "ULAS", 
     sub: "Aduan Kota Solo", 
-    icon: "bi-chat-left-text-fill", 
+    icon: iconUlas, 
     color: "bg-emerald-500",
     url: "https://ulas.surakarta.go.id/" 
   },
   { 
     name: "Lapor Mas Wali", 
     sub: "Aduan WhatsApp", 
-    icon: "bi-person-badge-fill", 
+    icon: iconLaporMasWali, 
     color: "bg-primary",
     url: "https://wa.me/6281225067171" 
   },
   { 
     name: "KONATA", 
-    icon: "bi-headset", 
+    icon: iconKonata, 
     sub: "Layanan Disabilitas", 
     color: "bg-purple-600",
     url: "https://konata.surakarta.go.id/" 
@@ -40,21 +50,21 @@ const services = [
   { 
     name: "Solo Data", 
     sub: "Portal Data Terbuka", 
-    icon: "bi-bar-chart-line-fill", 
+    icon: iconSoloData, 
     color: "bg-sky-500",
     url: "https://data.surakarta.go.id/" 
   },
   { 
     name: "PPID Pelaksana", 
     sub: "Informasi Publik", 
-    icon: "bi-file-earmark-lock-fill", 
+    icon: iconPpidPelaksana, 
     color: "bg-pink-600",
     url: "https://ppid.surakarta.go.id/" 
   },
   { 
     name: "Fasilitas Publik", 
     sub: "Akses Sarpras", 
-    icon: "bi-building-fill-check", 
+    icon: iconFasilitasPublik, 
     color: "bg-indigo-600",
     url: "https://surakarta.go.id" 
   },
@@ -84,12 +94,12 @@ export default function LayananCepat() {
               rel="noopener noreferrer"
               className="group p-8 rounded-2xl border border-primary/15 bg-white/80 backdrop-blur-xl shadow-[0_4px_20px_rgba(30,79,146,0.10)] hover:bg-white/95 hover:border-accent/40 hover:shadow-[0_8px_28px_rgba(41,168,224,0.18)] hover:-translate-y-1 dark:border-white/[0.13] dark:bg-white/[0.07] dark:shadow-[0_4px_20px_rgba(0,0,0,0.30)] dark:hover:bg-white/[0.12] dark:hover:border-white/[0.24] transition-all duration-500 flex flex-col items-center text-center cursor-pointer relative overflow-hidden"
             >
-              {/* Efek Glow Background */}
+              {/* Efek Glow Background, warna asli tiap layanan tetap dipakai di sini */}
               <div className={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 ${item.color}`}></div>
 
-              {/* Box Ikon */}
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white text-3xl mb-6 shadow-lg shadow-current/30 group-hover:rotate-12 group-hover:scale-110 transition-all duration-500 ${item.color}`}>
-                <i className={`bi ${item.icon}`}></i>
+              {/* Box Logo: putih/glass supaya logo PNG tampil natural, ring tipis pakai warna asli layanan */}
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-white dark:bg-white/90 ring-2 ring-offset-2 ring-offset-white/80 dark:ring-offset-white/[0.07] mb-6 shadow-md group-hover:rotate-6 group-hover:scale-110 transition-all duration-500`}>
+                <img src={item.icon} alt={item.name} className="w-9 h-9 object-contain" />
               </div>
               
               <h4 className="font-black text-primary-900 dark:text-white text-xs md:text-sm uppercase tracking-tight leading-tight flex items-center gap-2">

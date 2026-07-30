@@ -1,10 +1,6 @@
-// src/components/sections/HelpSection.jsx
 import { useState, useRef, useEffect } from 'react';
-import { api } from '../../services/api';
+// import { api } from '../../services/api'; // Hapus atau comment baris ini jika api tidak digunakan lagi di file ini
 
-// Basis pengetahuan sederhana — cocokkan keyword di pesan user ke jawaban.
-// Nanti kalau backend sudah sediakan endpoint chatbot beneran, tinggal
-// ganti isi fungsi getBotResponse() jadi fetch ke API, struktur di luar tidak perlu diubah.
 const knowledgeBase = [
   {
     keywords: ['ppid', 'informasi publik', 'permohonan informasi'],
@@ -62,8 +58,6 @@ export default function HelpSection() {
     setInput('');
     setIsTyping(true);
 
-    // Simulasi delay balasan biar terasa natural — hapus setTimeout ini
-    // kalau nanti getBotResponse() diganti jadi async fetch ke backend beneran.
     setTimeout(() => {
       const reply = getBotResponse(trimmed);
       setMessages((prev) => [...prev, { from: 'bot', text: reply }]);
@@ -75,25 +69,7 @@ export default function HelpSection() {
     if (e.key === 'Enter') handleSend();
   };
 
-  const [statCards, setStatCards] = useState([
-    { label: 'Hari Ini', value: '...' },
-    { label: 'Kemarin', value: '...' },
-    { label: 'Bulan Ini', value: '...' },
-    { label: 'Total Pengunjung', value: '...' },
-  ]);
-
-  useEffect(() => {
-    api.get('/visitor-stats')
-      .then((res) => {
-        setStatCards([
-          { label: 'Hari Ini', value: res.data.today },
-          { label: 'Kemarin', value: res.data.yesterday },
-          { label: 'Bulan Ini', value: res.data.month },
-          { label: 'Total Pengunjung', value: res.data.total },
-        ]);
-      })
-      .catch((err) => console.error('Gagal memuat statistik pengunjung:', err));
-  }, []);
+  // State statCards dan useEffect untuk /visitor-stats sudah dihapus dari sini
 
   return (
     <section className="py-14 bg-slate-50/50">
@@ -106,8 +82,9 @@ export default function HelpSection() {
           <p className="text-slate-400 font-medium text-sm">Temukan jawaban atau hubungi asisten virtual kami</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-          {/* 1. Chat BOT MONIKS — sudah fungsional (rule-based, murni frontend) */}
+        {/* Ubah mb-12 menjadi mb-0 atau hapus margin bottom karena bagian bawahnya (statistik) sudah hilang */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* 1. Chat BOT MONIKS */}
           <div className="bg-white rounded-2xl border border-accent-100 shadow-md overflow-hidden flex flex-col h-[450px]">
              <div className="bg-primary p-5 text-white flex justify-between items-center shrink-0">
                 <div className="flex gap-3 items-center">
@@ -194,17 +171,7 @@ export default function HelpSection() {
           </div>
         </div>
 
-        {/* 3. STATISTIK PENGUNJUNG — sekarang live dari /api/visitor-stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white p-6 rounded-2xl border border-accent-100 shadow-sm text-center">
-           {statCards.map((stat) => (
-             <div key={stat.label} className="group first:border-l-0 md:border-l border-slate-100">
-                <h3 className="text-2xl font-bold text-primary tracking-tight group-hover:scale-110 transition">
-                  {stat.value}
-                </h3>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-2">{stat.label}</p>
-             </div>
-           ))}
-        </div>
+        {/* Bagian Statistik Pengunjung (div grid statCards) sudah dihapus dari sini */}
       </div>
     </section>
   );

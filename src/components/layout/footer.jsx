@@ -15,22 +15,22 @@ export default function Footer() {
   ]);
 
   useEffect(() => {
-    api
-      .get("/visitor-stats")
-      .then((response) => {
-        if (response.data) {
-          setVisitorStats([
-            { label: "Hari Ini", value: response.data.today },
-            { label: "Kemarin", value: response.data.yesterday },
-            { label: "Bulan Ini", value: response.data.month },
-            { label: "Total", value: response.data.total },
-          ]);
-        }
-      })
-      .catch((error) => {
-        console.error("Gagal mengambil data statistik:", error);
-      });
-  }, []);
+  api
+    .get("/visitor-stats")
+    .then((response) => {
+      if (response.data) {
+        setVisitorStats([
+          { label: "Hari Ini", value: response.data.hari_ini },
+          { label: "Kemarin", value: response.data.kemarin },
+          { label: "Bulan Ini", value: response.data.bulan_ini },
+          { label: "Total", value: response.data.total },
+        ]);
+      }
+    })
+    .catch((error) => {
+      console.error("Gagal mengambil data statistik:", error);
+    });
+}, []);
 
   const orgsData = [
     { name: "PPID Kota Surakarta", sub: "Pejabat Pengelola Informasi & Dokumentasi", img: logoPPID },

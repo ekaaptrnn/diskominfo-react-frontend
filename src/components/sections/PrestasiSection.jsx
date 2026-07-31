@@ -27,7 +27,7 @@ export default function PrestasiSection() {
               <div className="w-16 h-16 rounded-2xl overflow-hidden flex items-center justify-center mb-6 shadow-lg border border-gray-100">
                 {p.image ? (
                   <img 
-                    src={`http://127.0.0.1:8000/storage/${p.image}`} 
+                    src={p.image} 
                     alt={p.title || p.name} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform"
                   />
@@ -42,7 +42,7 @@ export default function PrestasiSection() {
               <h3 className="font-bold text-slate-800 mb-1 leading-tight text-sm md:text-base">
                 {p.title || p.name}
               </h3>
-              <p className="text-[10px] font-bold text-accent-500 uppercase mb-4 tracking-tighter">
+              <p className="text-[10px] font-bold text-slate-500 uppercase mb-4 tracking-tighter">
                 {p.description || p.agency}
               </p>
               <span className="bg-accent-50 text-primary text-[10px] font-black px-4 py-1 rounded-full border border-accent-100">

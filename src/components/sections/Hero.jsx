@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import heroImage1 from "../../assets/hero/cover-diskominfo.jpg";
+import heroImage1 from "../../assets/hero/cover-diskominfo.jpeg";
 import heroImage2 from "../../assets/hero/prestasi-solo1.jpg";
 
 const banners = [
@@ -54,12 +54,16 @@ export default function Hero() {
       </AnimatePresence>
 
       {/* Social Media Sidebar (Left) */}
-      <div className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-20">
-        {['instagram', 'facebook', 'youtube'].map((icon) => (
-          <button key={icon} className="w-10 h-10 rounded-full border border-white/40 bg-primary-700 flex items-center justify-center hover:bg-white hover:text-primary transition-colors">
-            <i className={`bi bi-${icon}`}></i>
-          </button>
-        ))}
+      <div className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-20 text-white">
+        <a href="https://www.instagram.com/diskominfosp_surakarta" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/40 bg-primary-700 flex items-center justify-center hover:bg-white hover:text-primary transition-colors">
+          <i className="bi bi-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/diskominfospsurakarta/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/40 bg-primary-700 flex items-center justify-center hover:bg-white hover:text-primary transition-colors">
+          <i className="bi bi-facebook"></i>
+        </a>
+        <a href="https://www.youtube.com/@diskominfospsurakarta8388" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/40 bg-primary-700 flex items-center justify-center hover:bg-white hover:text-primary transition-colors">
+          <i className="bi bi-youtube"></i>
+        </a>
       </div>
 
       {/* Navigation Arrows */}

@@ -2,9 +2,78 @@ import { useEffect, useState } from "react";
 import { api, BASE_URL } from "../services/api";
 
 function getFotoUrl(p) {
-    if (!p.foto) return "https://ui-avatar.co/300?u=" + p.id;
-    if (p.foto.startsWith("http")) return p.foto;
-    return `${BASE_URL}/storage/${p.foto}`; 
+  if (!p.foto) return "https://ui-avatar.co/300?u=" + p.id;
+  if (p.foto.startsWith("http")) return p.foto;
+  return `${BASE_URL}/storage/${p.foto}`;
+}
+
+// Ubah daftar flat (dengan parent_id) jadi struktur pohon.
+// Pejabat dengan parent_id kosong/null = akar (level teratas).
+function buildTree(list) {
+  const byParent = {};
+  list.forEach((p) => {
+    const key = p.parent_id ?? "root";
+    if (!byParent[key]) byParent[key] = [];
+    byParent[key].push(p);
+  });
+
+  Object.values(byParent).forEach((arr) => arr.sort((a, b) => a.urutan - b.urutan));
+
+  function attachChildren(p) {
+    return { ...p, children: (byParent[p.id] || []).map(attachChildren) };
+  }
+
+  return (byParent["root"] || []).map(attachChildren);
+}
+
+// Satu kartu pejabat + garis penghubung ke anak-anaknya (rekursif, tidak terbatas kedalaman).
+function OrgNode({ node, depth = 0 }) {
+  const hasChildren = node.children && node.children.length > 0;
+  const isRoot = depth === 0;
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="text-center group">
+        <div className="relative inline-block">
+          {isRoot && (
+            <div className="absolute -inset-2 bg-gradient-to-tr from-primary to-accent-300 rounded-full blur opacity-20 group-hover:opacity-40 transition"></div>
+          )}
+          <img
+            src={getFotoUrl(node)}
+            alt={node.nama}
+            className={
+              isRoot
+                ? "relative w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-white shadow-2xl"
+                : "relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
+            }
+          />
+        </div>
+        <h3 className={isRoot ? "mt-8 font-black text-xl text-slate-800 leading-tight" : "mt-5 font-bold text-slate-800 text-sm leading-tight"}>
+          {node.nama}
+        </h3>
+        <p className={isRoot ? "text-primary font-bold text-sm uppercase tracking-widest mt-2" : "text-primary-700 font-semibold text-[11px] uppercase tracking-wide mt-1"}>
+          {node.jabatan}
+        </p>
+      </div>
+
+      {hasChildren && (
+        <div className="flex flex-col items-center mt-2">
+          {/* garis vertikal dari kartu ini turun ke garis horizontal anak-anaknya */}
+          <div className="w-px h-8 bg-slate-300"></div>
+
+          <div className="flex flex-wrap justify-center gap-x-12 gap-y-10 border-t border-slate-300 pt-8">
+            {node.children.map((child) => (
+              <div key={child.id} className="relative flex flex-col items-center">
+                {/* stub kecil dari garis horizontal turun ke kartu anak */}
+                <div className="absolute -top-8 w-px h-8 bg-slate-300"></div>
+                <OrgNode node={child} depth={depth + 1} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function StrukturOrganisasi() {
@@ -27,13 +96,10 @@ export default function StrukturOrganisasi() {
     return () => { isMounted = false; };
   }, []);
 
-  // Pimpinan utama (Kepala & Sekretaris) ditampilkan lebih besar di atas,
-  // sisanya (pejabat bidang) ditampilkan dalam grid di bawahnya.
-  const pimpinanUtama = pejabatList.filter((p) => p.tampil_utama);
-  const pejabatBidang = pejabatList.filter((p) => !p.tampil_utama);
+  const tree = buildTree(pejabatList);
 
   return (
-    <div className="pt-44 pb-20 px-6 max-w-6xl mx-auto min-h-screen">
+    <div className="pt-44 pb-20 px-6 max-w-6xl mx-auto min-h-screen overflow-x-auto">
       <div className="text-center mb-16">
         <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px]">Kelembagaan</span>
         <h1 className="text-4xl font-black text-slate-800 tracking-tighter mt-4">Struktur Organisasi</h1>
@@ -48,38 +114,17 @@ export default function StrukturOrganisasi() {
         <div className="py-20 text-center text-red-500 font-medium">{error}</div>
       ) : pejabatList.length === 0 ? (
         <div className="py-20 text-center text-slate-400 font-medium italic">Data struktur organisasi belum tersedia.</div>
+      ) : tree.length === 0 ? (
+        // Ada data, tapi semuanya punya parent_id yang tidak valid / tidak ada yang level teratas
+        <div className="py-20 text-center text-amber-600 font-medium italic">
+          Belum ada pejabat level teratas. Atur "Atasan" di dashboard admin untuk membentuk struktur.
+        </div>
       ) : (
-        <>
-          {pimpinanUtama.length > 0 && (
-            <div className="flex flex-wrap justify-center gap-16 mb-20 pb-16 border-b border-slate-100">
-              {pimpinanUtama.map((p) => (
-                <div key={p.id} className="text-center group">
-                  <div className="relative inline-block">
-                    <div className="absolute -inset-2 bg-gradient-to-tr from-primary to-accent-300 rounded-full blur opacity-20 group-hover:opacity-40 transition"></div>
-                    <img src={getFotoUrl(p)} className="relative w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-white shadow-2xl" alt={p.nama} />
-                  </div>
-                  <h3 className="mt-8 font-black text-xl text-slate-800 leading-tight">{p.nama}</h3>
-                  <p className="text-primary font-bold text-sm uppercase tracking-widest mt-2">{p.jabatan}</p>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {pejabatBidang.length > 0 && (
-            <>
-              <h2 className="text-center text-lg font-black text-slate-700 uppercase tracking-widest mb-10">Anggota Bidang</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {pejabatBidang.map((p) => (
-                  <div key={p.id} className="text-center bg-white rounded-3xl border border-slate-100 p-6 hover:shadow-lg transition">
-                    <img src={getFotoUrl(p)} className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg mx-auto" alt={p.nama} />
-                    <h3 className="mt-5 font-bold text-slate-800 text-sm leading-tight">{p.nama}</h3>
-                    <p className="text-primary-700 font-semibold text-[11px] uppercase tracking-wide mt-1">{p.jabatan}</p>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-        </>
+        <div className="flex flex-wrap justify-center gap-x-20 gap-y-16">
+          {tree.map((root) => (
+            <OrgNode key={root.id} node={root} depth={0} />
+          ))}
+        </div>
       )}
     </div>
   );

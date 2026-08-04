@@ -7,7 +7,10 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(() => {
+    const expired = new URLSearchParams(window.location.search).get('expired') === '1';
+    return expired ? 'Session Anda telah berakhir. Silakan login kembali.' : null;
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,11 +93,7 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-xs font-bold">
-            <label className="flex items-center gap-2 text-slate-500 cursor-pointer">
-              <input type="checkbox" className="rounded border-slate-300 text-primary focus:ring-0" />
-              Ingat Saya
-            </label>
+          <div className="flex items-center justify-end text-xs font-bold">
             <a href="#" className="text-[#dc2626] hover:underline uppercase tracking-tighter">Lupa Password?</a>
           </div>
 
